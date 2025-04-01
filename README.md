@@ -1,8 +1,7 @@
-# Next.js & HeroUI Template
+# Dental Time
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+Dental Time is a modern and responsive website designed in NextJs with Typescript.
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
 
 ## Technologies Used
 
@@ -15,15 +14,6 @@ This is a template for creating applications using Next.js 14 (app directory) an
 - [next-themes](https://github.com/pacocoursey/next-themes)
 
 ## How to Use
-
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
-```
-
 ### Install dependencies
 
 You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
@@ -48,6 +38,3 @@ public-hoist-pattern[]=*@heroui/*
 
 After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
 
-## License
-
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
