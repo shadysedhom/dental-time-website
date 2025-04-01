@@ -19,19 +19,19 @@ import CustomLink from "@/components/CustomLink";
 export const Navbar = () => {
   return (
     <HeroUINavbar
-      className=" fixed top-0 z-20 py-2 px-6 bg-zinc-100 bg-opacity-60 mx-auto rounded-md md:mt-3 md:w-5/6 "
+      className=" fixed top-0 z-20 py-2 px-6 bg-zinc-100 bg-opacity-60 mx-auto md:rounded-md md:mt-3 md:w-5/6 "
       maxWidth="xl"
       position="sticky"
     >
       {/* ------------------          Desktop Navbar       ---------------------- */}
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="center">
+      <NavbarContent className="basis-2/5 sm:basis-full" justify="center">
         {/* Logo */}
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
+        <NavbarBrand as="div" className="gap-3">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             <Image
               priority
               alt="Dental Time Logo (Navbar)"
-              className="h-full max-h-16 md:h-16 w-auto" // h-full for mobile, h-16 for tablet and larger
+              className=" h-full md:h-16 w-auto" // h-full for mobile, h-16 for tablet and larger
               height={100}
               src="/dental-time-black.svg"
               width={100}

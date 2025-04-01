@@ -12,9 +12,9 @@ export default function HeroSection() {
     <div>
       <section className="flex flex-col justify-center w-screen h-screen gap-6 py-8 md:py-10 bg-[url('/sitting-smile.jpg')] bg-cover bg-center">
         {/* Content Wrapper */}
-        <div className=" items-center md:ml-40 md:items-left p-20 bg-zinc-100 bg-opacity-70 w-fit rounded-md">
+        <div className=" items-center md:ml-40 md:items-left p-10 md:p-20 bg-zinc-100 bg-opacity-70 w-fit rounded-md">
           <div className="inline-block max-w-3xl text-left">
-            <div className="flex items-center uppercase ">
+            <div className="flex items-center text-left md:text-center uppercase ">
               <TextEffect
                 as="h1"
                 className={title({
@@ -31,7 +31,7 @@ export default function HeroSection() {
               <Image
                 priority
                 alt="Tooth Clock Icon"
-                className="ml-6 w-16 relative animate-blur-in"
+                className="ml-6 w-20 relative animate-blur-in"
                 height={100}
                 src="/IconBlack.svg"
                 width={100}

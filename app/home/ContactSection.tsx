@@ -80,10 +80,10 @@ export default function ContactSection() {
 
   return (
     <section className="w-full bg-gray-50 py-16 md:py-24" id="contact">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto md:px-6">
         <div className="grid lg:grid-cols-2">
           {/* Left Column - Contact Information */}
-          <div className="space-y-6 rounded-md p-10 md:p-20 bg-[url('/contact-bg.jpg')] bg-cover bg-center bg-no-repeat">
+          <div className="space-y-6 rounded-md p-6 md:p-20 bg-[url('/contact-bg.jpg')] bg-cover bg-center bg-no-repeat">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-black">
               Neem Contact Op
             </h2>
@@ -130,9 +130,8 @@ export default function ContactSection() {
           </div>
 
           {/* Right Column - Form */}
-          <div className="flex items-center p-8 bg-white">
+          <div className="flex items-center p-6 md:p-8 bg-white">
             <form className="space-y-6 w-full" onSubmit={handleSubmit}>
-              {/* TODO: Use your 'FormField' to make code less repetitive  /* */}
 
               {/* First & Last Name */}
               <div className="grid gap-4 sm:grid-cols-2">

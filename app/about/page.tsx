@@ -16,7 +16,7 @@ export default function AboutPage() {
       <div className="mt-20 md:mt-32" />
 
       {/* Title & Subtitle */}
-      <div className="text-center pt-10 px-20">
+      <div className="text-center pt-10 px-10 md:px-20">
         <h1 className={title()}>About Us</h1>
 
         <h2 className="text-2xl mt-4 font-semibold text-slate-800">

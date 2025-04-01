@@ -223,7 +223,7 @@ export default function RegistrationForm({
   };
 
   return (
-    <div className="flex items-center p-8 mb-40 bg-white w-11/12 md:w-5/6 rounded-md text-left">
+    <div className="flex items-center p-8 mb-40 bg-white md:w-5/6 rounded-md text-left">
       {/* Client Registration Form */}
       <form className="space-y-6 w-full" onSubmit={handleSubmit}>
         {/* Form Header and Description */}

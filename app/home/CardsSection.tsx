@@ -25,9 +25,9 @@ function CardContent({
     <div className="relative z-10">
       {icon}
 
-      <h3 className="text-2xl font-bold tracking-wide mt-4 mb-2">{title}</h3>
+      <h3 className="text-lg md:text-2xl font-bold tracking-wide mt-4 mb-2">{title}</h3>
 
-      <p className="mb-10 w-2/3">{description}</p>
+      <p className="mb-10 md:w-2/3">{description}</p>
 
       <Button
         as={Link}
@@ -55,7 +55,7 @@ function Overlay() {
 // General styling that applies to all cards
 const generalCardStyling = `
     w-full h-[50vh] relative bg-cover bg-center shadow-md rounded-md group 
-    px-20 flex items-center
+    px-10 md:px-20 flex items-center
     transition-transform duration-300 scale-[0.98] hover:scale-100
 `;
 
