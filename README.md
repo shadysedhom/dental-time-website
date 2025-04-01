@@ -1,6 +1,10 @@
+![dental-time-black](https://github.com/user-attachments/assets/c78df504-d5fb-422a-8875-2551ae34d936)
+
 # Dental Time
 
-Dental Time is a modern and responsive website designed in NextJs with Typescript.
+<svg width="791" height="261" viewBox="0 0 791 261" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+Dental Time is a modern and responsive website designed in NextJs with Typescript. Styled with Framer Motion & Tailwind CSS.
 
 ## Technologies Used
 
