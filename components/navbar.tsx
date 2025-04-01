@@ -57,7 +57,7 @@ export const Navbar = () => {
       `}</style>
 
       {/* ------------------          Desktop Navbar       ---------------------- */}
-      <NavbarContent className="basis-2/5 sm:basis-full" justify="center">
+      <NavbarContent className="basis-2/5 sm:basis-full justify-center" justify="center">
         {/* Logo */}
         <NavbarBrand as="div" className="gap-3">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -73,7 +73,7 @@ export const Navbar = () => {
         </NavbarBrand>
 
         {/* Navbar Menu */}
-        <ul className="hidden lg:flex gap-16 justify-center mx-auto">
+        <ul className="hidden grow lg:flex gap-16 justify-center mx-auto">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <CustomLink className=" text-lg uppercase " href={item.href}>
