@@ -19,7 +19,7 @@ export default function HeroSection() {
                 as="h1"
                 className={title({
                   class:
-                    "font-[NotoSerif] font-normal tracking-wider text-black text-4xl md:text-7xl",
+                    "font-[NotoSerif] font-normal tracking-wider leading-loose text-black text-4xl md:text-7xl",
                 })}
                 per="word"
                 preset="fade-in-blur"
