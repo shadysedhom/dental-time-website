@@ -2,7 +2,6 @@
 
 Dental Time is a modern and responsive website designed in NextJs with Typescript.
 
-
 ## Technologies Used
 
 - [Next.js 14](https://nextjs.org/docs/getting-started)
@@ -14,6 +13,7 @@ Dental Time is a modern and responsive website designed in NextJs with Typescrip
 - [next-themes](https://github.com/pacocoursey/next-themes)
 
 ## How to Use
+
 ### Install dependencies
 
 You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
@@ -37,4 +37,3 @@ public-hoist-pattern[]=*@heroui/*
 ```
 
 After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-

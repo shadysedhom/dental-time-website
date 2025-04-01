@@ -1,4 +1,3 @@
-
 export type NavItem = {
   label: string;
   href: string;
@@ -27,7 +26,8 @@ export type SiteConfig = {
 export const siteConfig = {
   name: "Dental Time",
   description: "Tandarts in Nieuwegein",
-  navItems: [ // For Desktop
+  navItems: [
+    // For Desktop
     {
       label: "Home",
       href: "/",
@@ -45,7 +45,8 @@ export const siteConfig = {
       href: "https://maps.app.goo.gl/k8JoZPNGD9JEsA8r6",
     },
   ],
-  navMenuItems: [ // For Mobile
+  navMenuItems: [
+    // For Mobile
     {
       label: "Home",
       href: "/",
@@ -69,41 +70,41 @@ export const siteConfig = {
   ],
   openingTimes: [
     {
-        day: "Maandag",
-        time: "08:00 - 17:00",
+      day: "Maandag",
+      time: "08:00 - 17:00",
     },
     {
-        day: "Dinsdag",
-        time: "Gesloten",
+      day: "Dinsdag",
+      time: "Gesloten",
     },
     {
-        day: "Woensdag",
-        time: "08:00 - 17:00",
+      day: "Woensdag",
+      time: "08:00 - 17:00",
     },
     {
-        day: "Donderdag",
-        time: "08:00 - 17:00",
+      day: "Donderdag",
+      time: "08:00 - 17:00",
     },
     {
-        day: "Vrijdag - Zondag",
-        time: "Gesloten",
-    }
+      day: "Vrijdag - Zondag",
+      time: "Gesloten",
+    },
   ],
   contactMenuItems: [
     {
-        icon: "Phone",
-        label: "030 604 9005",
-        href: "tel:0306049005"
+      icon: "Phone",
+      label: "030 604 9005",
+      href: "tel:0306049005",
     },
-    { 
-        icon: "Mail",
-        label: "info@dental-time.nl", 
-        href: "mailto:info@dental-time.nl"
+    {
+      icon: "Mail",
+      label: "info@dental-time.nl",
+      href: "mailto:info@dental-time.nl",
     },
-    { 
-        icon: "MapPin",
-        label: "Carillonlaan 15, 3438RC Nieuwegein", 
-        href: "https://maps.app.goo.gl/k8JoZPNGD9JEsA8r6"
+    {
+      icon: "MapPin",
+      label: "Carillonlaan 15, 3438RC Nieuwegein",
+      href: "https://maps.app.goo.gl/k8JoZPNGD9JEsA8r6",
     },
   ],
 };
