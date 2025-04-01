@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import {
   Navbar as HeroUINavbar,
@@ -23,6 +24,38 @@ export const Navbar = () => {
       maxWidth="xl"
       position="sticky"
     >
+
+      <style jsx>{`
+        @keyframes gradientShine {
+          0% {
+            background-position: 0% 50%;
+          }
+          25% {
+            background-position: 50% 100%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          75% {
+            background-position: 50% 0%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        :global(.shining-gradient) {
+          background: repeating-linear-gradient(
+            240deg,
+            #fff,  /* Almost white */
+            #d8d8d8, /* Light gray */
+            #b8d5e0 /* Light blue */
+          );
+          background-size: 200% 200%;
+          animation: gradientShine 8s ease-in-out infinite;
+        }
+      `}</style>
+
       {/* ------------------          Desktop Navbar       ---------------------- */}
       <NavbarContent className="basis-2/5 sm:basis-full" justify="center">
         {/* Logo */}
@@ -76,7 +109,7 @@ export const Navbar = () => {
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu className="mt-4 rounded-t-lg bg-gradient-to-br from-zinc-300 via-gray-100 to-zinc-400 shadow-lg">
+      <NavbarMenu className="mt-4 rounded-t-lg shining-gradient shadow-lg">
         <div className="mx-4 mt-2 flex flex-col gap-4">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
