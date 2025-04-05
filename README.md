@@ -4,7 +4,9 @@
 
 <svg width="791" height="261" viewBox="0 0 791 261" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-Dental Time is a modern and responsive website designed in NextJs with Typescript. Styled with Framer Motion & Tailwind CSS.
+A sleek and responsive website for a dental clinic (Dental Time) designed in NextJs with Typescript. Styled with Framer Motion & Tailwind CSS.
+
+https://www.dental-time.nl
 
 ## Technologies Used
 
