@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Link } from "@heroui/link";
 import { Star } from "lucide-react";
+import ReviewSlider from "./ReviewSlider";
 
 export default function SocialProofSection() {
   const socialProofData = [
@@ -20,6 +21,10 @@ export default function SocialProofSection() {
 
   return (
     <section className="flex flex-wrap justify-center items-center gap-16 py-12">
+
+      {/* Review Slider */}
+      <ReviewSlider />
+
       {/* Google Rating */}
       <div className="flex items-center">
         <div className="flex flex-col items-center mb-2">

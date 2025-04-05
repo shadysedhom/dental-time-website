@@ -72,7 +72,7 @@ export default function CardsSection() {
         <Overlay />
 
         <CardContent
-          description="Wij verheugen ons om onze deuren te openen voor nieuwe gezichten. U kunt zich telefonisch bij ons inschrijven of door middel van het online inschrijfformulier."
+          description="Wij verheugen ons om onze deuren te openen voor nieuwe patiënten. U kunt zich telefonisch bij ons inschrijven of door middel van het online inschrijfformulier."
           icon={<UserPlus className="text-white" size={40} />}
           linkHref="/inschrijven"
           linkText="Online Inschrijven"
