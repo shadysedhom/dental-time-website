@@ -48,7 +48,7 @@ export default function ReviewSlider() {
           spaceBetween={30}
           slidesPerView={1}
           autoplay={{ delay: 4000, disableOnInteraction: false }}
-          className="w-full max-w-md md:max-w-xl border rounded-lg shadow-md"
+          className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg border rounded-lg shadow-md"
         >
           {reviews.map((review, index) => (
             <SwiperSlide key={index} >

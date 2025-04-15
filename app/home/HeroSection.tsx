@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Link } from "@heroui/link";
 import { Button } from "@heroui/button";
-import { Phone } from "lucide-react";
+import { Phone, UserPlus } from "lucide-react";
 
 import { TextEffect } from "@/components/motion-primitives/text-effect";
 import { title, subtitle } from "@/components/primitives";
@@ -10,16 +10,17 @@ import { title, subtitle } from "@/components/primitives";
 export default function HeroSection() {
   return (
     <div>
-      <section className="flex flex-col justify-center w-screen h-screen gap-6 py-8 md:py-10 bg-[url('/sitting-smile.jpg')] bg-cover bg-center">
+      <section className="flex flex-col justify-center w-screen h-screen gap-6 py-8 lg:py-10 bg-[url('/sitting-smile.jpg')] bg-cover bg-center">
         {/* Content Wrapper */}
-        <div className=" items-center md:ml-40 md:items-left p-10 md:p-20 bg-zinc-100 bg-opacity-70 w-fit rounded-md">
+        
+        <div className="items-left p-10 lg:p-20 lg:ml-40 bg-zinc-100 bg-opacity-70 lg:w-1/3 max-w-full rounded-md transition-all duration-300">
           <div className="inline-block max-w-3xl text-left">
-            <div className="flex items-center text-left md:text-center uppercase ">
+            <div className="flex items-center text-left uppercase ">
               <TextEffect
                 as="h1"
                 className={title({
                   class:
-                    "font-[NotoSerif] font-normal tracking-wider leading-loose text-black text-4xl md:text-7xl",
+                    "font-[NotoSerif] font-normal tracking-wider leading-loose text-black text-4xl",
                 })}
                 per="word"
                 preset="fade-in-blur"
@@ -51,16 +52,27 @@ export default function HeroSection() {
             </TextEffect>
           </div>
 
-          <div className="flex gap-4 mt-6 animate-slide-in-left animate-blur-in">
+          <div className="mt-6 animate-slide-in-left animate-blur-in uppercase">
             <Button
               as={Link}
-              className="rounded-md uppercase animate-blur-in"
-              color="primary"
               href="tel:0306049005"
+              color="default"
               variant="shadow"
+              className=" p-6 mr-12 my-6 font-medium animate-blur-in bg-gradient-to-r from-zinc-900 to-gray-700 text-white shadow-lg hover:from-gray-700 hover:to-zinc-900 transition-all duration-300"
+              startContent={<Phone className="text-white w-4 h-4" />}
             >
-              <Phone className="mr-2" size={20} />
               030 6049005
+            </Button>
+
+            <Button
+              as={Link}
+              href="/inschrijven"
+              color="primary"
+              variant="solid"
+              className="p-6 font-mediumtext-white animate-blur-in bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
+              startContent={<UserPlus className="text-white w-4 h-4" />}
+            >
+              Inschrijven
             </Button>
           </div>
 

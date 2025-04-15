@@ -60,13 +60,14 @@ export const Navbar = () => {
       <NavbarContent className="basis-2/5 sm:basis-full justify-center" justify="center">
         {/* Logo */}
         <NavbarBrand as="div" className="gap-3">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
+          <NextLink className="flex justify-start items-center gap-1 h-10" href="/">
             <Image
               priority
-              alt="Dental Time Logo (Navbar)"
-              className=" h-full md:h-16 w-auto" // h-full for mobile, h-16 for tablet and larger
-              height={100}
               src="/dental-time-black.svg"
+              alt="Dental Time Logo (Navbar)"
+              // className=" h-full md:h-16 w-auto" // h-full for mobile, h-16 for tablet and larger
+              className=" h-full lg:h-16 w-auto" // h-full for mobile, h-16 for tablet and larger
+              height={100}
               width={100}
             />
           </NextLink>
@@ -88,19 +89,19 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        {/* Signup Button */}
+        {/* Signup Button // Moved to Hero Section
         <NavbarItem className="hidden md:flex">
           <Button
             as={Link}
+            href="/inschrijven"
             className="text-sm font-normal text-white rounded-md uppercase "
             color="primary"
-            href="/inschrijven"
             variant="solid"
+            startContent={<UserPlus className="text-white" />}
           >
-            <UserPlus className="" />
             Inschrijven
           </Button>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
 
       {/* ---------------------       Mobile Navbar          ---------------------- */}
