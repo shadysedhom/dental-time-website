@@ -66,7 +66,7 @@ export const Navbar = () => {
               src="/dental-time-gold.svg"
               alt="Dental Time Logo (Navbar)"
               // className=" h-full md:h-16 w-auto" // h-full for mobile, h-16 for tablet and larger
-              className=" h-full lg:h-24 w-auto" // h-full for mobile, h-16 for tablet and larger
+              className=" h-16 md:h-24 w-auto" // h-full for mobile, h-16 for tablet and larger
               height={100}
               width={100}
             />
