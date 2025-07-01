@@ -34,7 +34,7 @@ export default function HeroSection() {
                 alt="Tooth Clock Icon"
                 className="ml-6 w-20 relative animate-blur-in"
                 height={100}
-                src="/IconBlack.svg"
+                src="/IconGold.svg"
                 width={100}
               />
             </div>

@@ -26,9 +26,9 @@ export default function Footer() {
             {/* Footer Logo */}
             <Image
               alt="Dental Time Logo"
-              className="h-12 w-auto"
+              className=" h-24 w-auto"
               height={100}
-              src="/dental-time-black.svg"
+              src="/dental-time-gold.svg"
               width={100}
             />
 
@@ -80,6 +80,12 @@ export default function Footer() {
                   <CustomLink href={item.href}>{item.label}</CustomLink>
                 </li>
               ))}
+
+              <li>
+                <CustomLink href="/algemene-voorwaarden">
+                  Algemene voorwaarden
+                </CustomLink>
+              </li>
 
               <li>
                 <CustomLink href="/privacyverklaring">

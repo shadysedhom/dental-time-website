@@ -7,7 +7,6 @@ import { Checkbox } from "@heroui/checkbox";
 import NextLink from "next/link";
 import { link as linkStyles } from "@heroui/theme";
 import clsx from "clsx";
-import emailjs from "emailjs-com";
 import { Send } from "lucide-react";
 
 import FormField from "../../components/FormField";
@@ -22,6 +21,7 @@ type RegistrationFormProps = {
 
 // Full Form to handle new client registrations
 // It can handle multiple family members and sends the data via email using emailjs
+// It can also handle sending data directly to Formcarry
 export default function RegistrationForm({
   headerStyling,
 }: RegistrationFormProps) {
@@ -181,22 +181,20 @@ export default function RegistrationForm({
       family_members: familyMembersString,
     };
 
-    // EmailJS configuration
-    const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string;
-    const templateID = process.env
-      .NEXT_PUBLIC_EMAILJS_REGISTRATION_TEMPLATE_ID as string;
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string;
+    // Formcarry endpoint (replace with your actual endpoint ID)
+    const formcarryEndpoint = "https://formcarry.com/s/ILtNu--pNFt";
 
-    // Send client regisration email using EmailJS
     try {
-      const response = await emailjs.send(
-        serviceID,
-        templateID,
-        templateParams,
-        publicKey,
-      );
+      const response = await fetch(formcarryEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(templateParams),
+      });
 
-      if (response.status === 200) {
+      if (response.ok) {
         setAlert({
           type: "success",
           message: "Inschrijving succesvol verzonden!",
@@ -425,7 +423,7 @@ export default function RegistrationForm({
           />
 
           <label className="text-sm text-gray-700" htmlFor="termsAndConditions">
-            Ik bevestig dat ik akkoord ga met de{" "}
+            Ik bevestig dat ik akkoord ga met de &nbsp;
             <NextLink
               className={clsx(
                 linkStyles({ color: "foreground" }),
@@ -437,6 +435,7 @@ export default function RegistrationForm({
               privacyverklaring
               <span className={linkStyling} />
             </NextLink>
+            &nbsp; en het verwerken van mijn persoonsgegevens voor inschrijving
             <span className="text-red-500">*</span>
           </label>
         </div>
