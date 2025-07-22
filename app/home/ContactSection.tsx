@@ -123,7 +123,13 @@ export default function ContactSection() {
 
               {siteConfig.openingTimes.map((item, index) => (
                 <p key={`${item.day}-${index}`} className="flex items-center">
-                  <BulletPoint /> {item.day}: {item.time}
+                  <BulletPoint />
+                  <span className="text-black w-24 flex-shrink-0">
+                    {item.day}
+                  </span>
+                  <span className="ml-6 text-black">
+                    {item.time}
+                  </span>
                 </p>
               ))}
             </div>

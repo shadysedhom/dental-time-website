@@ -87,7 +87,7 @@ export const siteConfig = {
     },
     {
       day: "Vrijdag",
-      time: "08:00 - 17:00",
+      time: "08:00 - 12:00",
     },
     {
       day: "Zaterdag",

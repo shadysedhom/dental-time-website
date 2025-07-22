@@ -60,9 +60,14 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               {siteConfig.openingTimes.map((item, index) => (
                 <li key={`${item.day}-${index}`}>
-                  <p className="text-gray-600 ">
-                    {item.day}: {item.time}
-                  </p>
+                  <div className="flex">
+                    <span className="text-gray-600 w-24 flex-shrink-0">
+                      {item.day}
+                    </span>
+                    <span className="ml-6 text-gray-600">
+                      {item.time}
+                    </span>
+                  </div>
                 </li>
               ))}
             </ul>
