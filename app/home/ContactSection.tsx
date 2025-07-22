@@ -101,8 +101,8 @@ export default function ContactSection() {
               <div className="flex items-center space-x-3">
                 <Building2 className="h-5 w-5 text-black" />
                 <div>
-                  <p className="text-black">Carillonlaan 15</p>
-                  <p className="text-black">3438RC Nieuwegein</p>
+                  <p className="text-black">Waardijnburg 3</p>
+                  <p className="text-black">3437 AR Nieuwegein</p>
                 </div>
               </div>
 
