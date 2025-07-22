@@ -27,7 +27,7 @@ export const siteConfig = {
   name: "Dental Time",
   description: "Tandarts in Nieuwegein",
   navItems: [
-    // For Desktop
+    // -------------- For Desktop --------------
     {
       label: "Home",
       href: "/",
@@ -42,11 +42,11 @@ export const siteConfig = {
     },
     {
       label: "Route",
-      href: "https://maps.app.goo.gl/k8JoZPNGD9JEsA8r6",
+      href: "https://maps.app.goo.gl/7SePSo3Ta4GdoB7d9",
     },
   ],
   navMenuItems: [
-    // For Mobile
+    // -------------- For Mobile --------------
     {
       label: "Home",
       href: "/",
@@ -61,7 +61,7 @@ export const siteConfig = {
     },
     {
       label: "Route",
-      href: "https://maps.app.goo.gl/k8JoZPNGD9JEsA8r6",
+      href: "https://maps.app.goo.gl/7SePSo3Ta4GdoB7d9",
     },
     {
       label: "Inschrijven",
@@ -75,7 +75,7 @@ export const siteConfig = {
     },
     {
       day: "Dinsdag",
-      time: "Gesloten",
+      time: "08:00 - 17:00",
     },
     {
       day: "Woensdag",
@@ -86,7 +86,15 @@ export const siteConfig = {
       time: "08:00 - 17:00",
     },
     {
-      day: "Vrijdag - Zondag",
+      day: "Vrijdag",
+      time: "08:00 - 17:00",
+    },
+    {
+      day: "Zaterdag",
+      time: "Gesloten",
+    },
+    {
+      day: "Zondag",
       time: "Gesloten",
     },
   ],
@@ -103,8 +111,8 @@ export const siteConfig = {
     },
     {
       icon: "MapPin",
-      label: "Carillonlaan 15, 3438RC Nieuwegein",
-      href: "https://maps.app.goo.gl/k8JoZPNGD9JEsA8r6",
+      label: "Waardijnburg 3, 3437 AR Nieuwegein",
+      href: "https://maps.app.goo.gl/7SePSo3Ta4GdoB7d9",
     },
   ],
 };

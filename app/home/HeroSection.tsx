@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Link } from "@heroui/link";
 import { Button } from "@heroui/button";
-import { Phone, UserPlus } from "lucide-react";
+import { Phone, UserPlus, MapPin, Clock } from "lucide-react";
 
 import { TextEffect } from "@/components/motion-primitives/text-effect";
 import { title, subtitle } from "@/components/primitives";
@@ -20,7 +20,7 @@ export default function HeroSection() {
                 as="h1"
                 className={title({
                   class:
-                    "font-[NotoSerif] font-normal tracking-wider leading-loose text-black text-4xl",
+                    "font-serif font-semibold tracking-wider leading-loose text-black text-4xl",
                 })}
                 per="word"
                 preset="fade-in-blur"

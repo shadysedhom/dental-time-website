@@ -42,7 +42,7 @@ export default function PrivacyverklaringPage() {
         {/* Title & Subtitle */}
         <h1 className={title()}>Privacyverklaring</h1>
         <h2 className={subtitleStyling}>
-          {companyName}, gevestigd aan Carillonlaan 15 te Nieuwegein, is
+          {companyName}, gevestigd aan Waardijnburg 3 te Nieuwegein, is
           verantwoordelijk voor de verwerking van persoonsgegevens zoals
           weergegeven in deze privacyverklaring.
         </h2>
