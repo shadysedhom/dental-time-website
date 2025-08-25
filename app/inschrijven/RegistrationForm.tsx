@@ -88,7 +88,7 @@ export default function RegistrationForm({
       return;
     }
 
-    // Primary user data
+    // Store primary user data in an object
     const primaryUser = {
       salutation: formData.get("salutation"),
       firstName: formData.get("firstName"),
@@ -132,56 +132,46 @@ export default function RegistrationForm({
     // Filter out empty family members (if any)
     const filteredFamilyMembers = familyMembers.filter((member) => member);
 
-    // Format family members data into a readable string
-    const familyMembersString =
-      filteredFamilyMembers.length > 0
-        ? filteredFamilyMembers
-            .map((member, index) => {
-              return `
-                <p><strong>Gezinslid ${index + 1}</strong></p>
-                <p>
-                <strong>Begroeting:</strong> ${member.salutation}<br>
-                <strong>Voornaam:</strong> ${member.firstName}<br>
-                <strong>Achternaam:</strong> ${member.lastName}<br>
-                <strong>Geboortedatum:</strong> ${formatDate(member.dateOfBirth)}<br>
-                <strong>Straatnaam:</strong> ${member.streetName}<br>
-                <strong>Huisnummer:</strong> ${member.houseNumber}<br>
-                <strong>Postcode:</strong> ${member.postalCode}<br>
-                <strong>Plaatsnaam:</strong> ${member.city}<br>
-                <strong>Telefoonnummer:</strong> ${member.phone}<br>
-                <strong>E-mail:</strong> ${member.email}<br>
-                <strong>BSN Nummer:</strong> ${member.bsn}<br>
-                <strong>Polisnummer:</strong> ${member.insuranceNumber || "N/A"}<br>
-                <strong>Huidige Tandarts Naam:</strong> ${member.dentistName || "N/A"}<br>
-                <strong>Huidige Tandarts Plaats:</strong> ${member.dentistCity || "N/A"}<br>
-                </p>
-                <hr>
-            `;
-            })
-            .join("")
-        : "<p>Geen gezinsleden toegevoegd.</p>";
-
     // Prepare email template parameters
-    const templateParams = {
-      primary_salutation: primaryUser.salutation,
-      primary_firstName: primaryUser.firstName,
-      primary_lastName: primaryUser.lastName,
-      primary_dateOfBirth: primaryUser.dateOfBirth,
-      primary_streetName: primaryUser.streetName,
-      primary_houseNumber: primaryUser.houseNumber,
-      primary_postalCode: primaryUser.postalCode,
-      primary_city: primaryUser.city,
-      primary_phone: primaryUser.phone,
-      primary_email: primaryUser.email,
-      primary_bsn: primaryUser.bsn,
-      primary_insuranceNumber: primaryUser.insuranceNumber || "N/A",
-      primary_dentistName: primaryUser.dentistName || "N/A",
-      primary_dentistCity: primaryUser.dentistCity || "N/A",
-      primary_message: primaryUser.message || "N/A",
-      family_members: familyMembersString,
+    const templateParams: Record<string, any> = {
+      "Aanhef": primaryUser.salutation,
+      "Voornaam": primaryUser.firstName,
+      "Achternaam": primaryUser.lastName,
+      "Geboortedatum": primaryUser.dateOfBirth,
+      "Straatnaam": primaryUser.streetName,
+      "Huisnummer": primaryUser.houseNumber,
+      "Postcode": primaryUser.postalCode,
+      "Plaatsnaam": primaryUser.city,
+      "Telefoonnummer": primaryUser.phone,
+      "E-mail": primaryUser.email,
+      "BSN": primaryUser.bsn,
+      "Polisnummer": primaryUser.insuranceNumber || "N/A",
+      "Huidige Tandarts": primaryUser.dentistName || "N/A",
+      "Huidige Tandarts Plaats": primaryUser.dentistCity || "N/A",
+      "Opmerkingen": primaryUser.message || "N/A",
+      "Aantal Gezinsleden": filteredFamilyMembers.length.toString(),
     };
 
-    // Formcarry endpoint (replace with your actual endpoint ID)
+    // Add family members as individual fields (same approach as primary user)
+    filteredFamilyMembers.forEach((member, index) => {
+      const memberNumber = index + 1;
+      templateParams[`Gezinslid ${memberNumber} - Aanhef`] = member.salutation;
+      templateParams[`Gezinslid ${memberNumber} - Voornaam`] = member.firstName;
+      templateParams[`Gezinslid ${memberNumber} - Achternaam`] = member.lastName;
+      templateParams[`Gezinslid ${memberNumber} - Geboortedatum`] = formatDate(member.dateOfBirth);
+      templateParams[`Gezinslid ${memberNumber} - Straatnaam`] = member.streetName;
+      templateParams[`Gezinslid ${memberNumber} - Huisnummer`] = member.houseNumber;
+      templateParams[`Gezinslid ${memberNumber} - Postcode`] = member.postalCode;
+      templateParams[`Gezinslid ${memberNumber} - Plaatsnaam`] = member.city;
+      templateParams[`Gezinslid ${memberNumber} - Telefoonnummer`] = member.phone;
+      templateParams[`Gezinslid ${memberNumber} - E-mail`] = member.email;
+      templateParams[`Gezinslid ${memberNumber} - BSN Nummer`] = member.bsn;
+      templateParams[`Gezinslid ${memberNumber} - Polisnummer`] = member.insuranceNumber || "N/A";
+      templateParams[`Gezinslid ${memberNumber} - Huidige Tandarts Naam`] = member.dentistName || "N/A";
+      templateParams[`Gezinslid ${memberNumber} - Huidige Tandarts Plaats`] = member.dentistCity || "N/A";
+    });
+
+    // Formcarry endpoint
     const formcarryEndpoint = "https://formcarry.com/s/ILtNu--pNFt";
 
     try {
