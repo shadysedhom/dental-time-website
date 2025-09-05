@@ -10,7 +10,6 @@ import {
   NavbarMenuItem,
 } from "@heroui/navbar";
 import { Button } from "@heroui/button";
-import { Link } from "@heroui/link";
 import NextLink from "next/link";
 import { UserPlus } from "lucide-react";
 
@@ -24,7 +23,6 @@ export const Navbar = () => {
       maxWidth="xl"
       position="sticky"
     >
-
       <style jsx>{`
         @keyframes gradientShine {
           0% {
@@ -47,9 +45,9 @@ export const Navbar = () => {
         :global(.shining-gradient) {
           background: repeating-linear-gradient(
             240deg,
-            #fff,  /* Almost white */
-            #d8d8d8, /* Light gray */
-            #b8d5e0 /* Light blue */
+            #fff,
+            /* Almost white */ #d8d8d8,
+            /* Light gray */ #b8d5e0 /* Light blue */
           );
           background-size: 200% 200%;
           animation: gradientShine 8s ease-in-out infinite;
@@ -57,18 +55,24 @@ export const Navbar = () => {
       `}</style>
 
       {/* ------------------          Desktop Navbar       ---------------------- */}
-      <NavbarContent className="basis-2/5 sm:basis-full justify-center" justify="center">
+      <NavbarContent
+        className="basis-2/5 sm:basis-full justify-center"
+        justify="center"
+      >
         {/* Logo */}
         <NavbarBrand as="div" className="gap-3">
-          <NextLink className="flex justify-start items-center gap-1 h-10" href="/">
+          <NextLink
+            className="flex justify-start items-center gap-1 h-10"
+            href="/"
+          >
             <Image
               priority
-              src="/dental-time-gold.svg"
+              height={100}
+              src="/dental-time-gold.svg" // h-full for mobile, h-16 for tablet and larger
+              width={100}
               alt="Dental Time Logo (Navbar)"
               // className=" h-full md:h-16 w-auto" // h-full for mobile, h-16 for tablet and larger
-              className=" h-16 md:h-24 w-auto" // h-full for mobile, h-16 for tablet and larger
-              height={100}
-              width={100}
+              className=" h-16 md:h-24 w-auto"
             />
           </NextLink>
         </NavbarBrand>

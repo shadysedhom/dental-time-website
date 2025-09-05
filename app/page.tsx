@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col absolute top-0 left-0 gap-2 items-center justify-center">
-        
         <HeroSection />
         <SocialProofSection />
         <CardsSection />

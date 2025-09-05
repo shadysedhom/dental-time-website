@@ -1,20 +1,25 @@
-'use client';
+"use client";
 
-import { useState, useEffect, Fragment } from 'react';
-import { Button } from '@heroui/button';
-import { Alert } from '@heroui/alert';
-import { Checkbox } from '@heroui/checkbox';
-import NextLink from 'next/link';
-import { link as linkStyles } from '@heroui/theme';
-import clsx from 'clsx';
-import { Send } from 'lucide-react';
+import { useState, useEffect, Fragment } from "react";
+import { Button } from "@heroui/button";
+import { Alert } from "@heroui/alert";
+import { Checkbox } from "@heroui/checkbox";
+import NextLink from "next/link";
+import { link as linkStyles } from "@heroui/theme";
+import clsx from "clsx";
+import { Send } from "lucide-react";
 
-import FormField from '../../components/FormField';
+import FormField from "../../components/FormField";
 
-import RadioGroup from './RadioGroup';
-import TextAreaField from './TextAreaField';
-import FamilyMemberForm from './FamilyMemberForm';
-import MedicalQuestionnaireModal, { ADULT_QUESTIONS_MAP, KID_QUESTIONS_MAP, ADULT_DETAIL_QUESTIONS_MAP, KID_DETAIL_QUESTIONS_MAP } from './MedicalQuestionnaireModal';
+import RadioGroup from "./RadioGroup";
+import TextAreaField from "./TextAreaField";
+import FamilyMemberForm from "./FamilyMemberForm";
+import MedicalQuestionnaireModal, {
+  ADULT_QUESTIONS_MAP,
+  KID_QUESTIONS_MAP,
+  ADULT_DETAIL_QUESTIONS_MAP,
+  KID_DETAIL_QUESTIONS_MAP,
+} from "./MedicalQuestionnaireModal";
 
 type RegistrationFormProps = {
   headerStyling: string;
@@ -32,7 +37,7 @@ export default function RegistrationForm({
   // State management for form submission and family members
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
-  const [alert, setAlert] = useState<{ 
+  const [alert, setAlert] = useState<{
     type: "success" | "danger";
     message: string;
   } | null>(null);
@@ -96,6 +101,7 @@ export default function RegistrationForm({
         type: "danger",
         message: "U moet de medische vragenlijst voor uzelf invullen.",
       });
+
       return;
     }
 
@@ -103,13 +109,16 @@ export default function RegistrationForm({
       const hasMedicalData = Array.from(formData.keys()).some((key) =>
         key.startsWith(`familyMembers[${id}][medical]`),
       );
+
       if (!hasMedicalData) {
         const memberName =
           formData.get(`familyMembers[${id}][firstName]`) || `Gezinslid ${id}`;
+
         setAlert({
           type: "danger",
           message: `U moet de medische vragenlijst voor ${memberName} invullen.`,
         });
+
         return;
       }
     }
@@ -120,6 +129,7 @@ export default function RegistrationForm({
         message:
           "U moet akkoord gaan met de privacyverklaring om het formulier te verzenden.",
       });
+
       return;
     }
 
@@ -144,48 +154,66 @@ export default function RegistrationForm({
 
     // --- Prepare Email Template ---
     const templateParams: Record<string, any> = {
-      "Aanhef": primaryUser.salutation,
-      "Voornaam": primaryUser.firstName,
-      "Achternaam": primaryUser.lastName,
-      "Geboortedatum": primaryUser.dateOfBirth,
-      "Straatnaam": primaryUser.streetName,
-      "Huisnummer": primaryUser.houseNumber,
-      "Postcode": primaryUser.postalCode,
-      "Plaatsnaam": primaryUser.city,
-      "Telefoonnummer": primaryUser.phone,
+      Aanhef: primaryUser.salutation,
+      Voornaam: primaryUser.firstName,
+      Achternaam: primaryUser.lastName,
+      Geboortedatum: primaryUser.dateOfBirth,
+      Straatnaam: primaryUser.streetName,
+      Huisnummer: primaryUser.houseNumber,
+      Postcode: primaryUser.postalCode,
+      Plaatsnaam: primaryUser.city,
+      Telefoonnummer: primaryUser.phone,
       "E-mail": primaryUser.email,
-      "BSN": primaryUser.bsn,
+      BSN: primaryUser.bsn,
       "Huidige Tandarts": primaryUser.dentistName || "N/A",
-      "Opmerkingen": primaryUser.message || "N/A",
+      Opmerkingen: primaryUser.message || "N/A",
     };
 
     // --- Primary User Medical Data ---
-    const primaryUserAge = new Date().getFullYear() - new Date(primaryUser.dateOfBirth as string).getFullYear();
-    const primaryUserQuestionMap = primaryUserAge >= 16 ? ADULT_QUESTIONS_MAP : KID_QUESTIONS_MAP;
+    const primaryUserAge =
+      new Date().getFullYear() -
+      new Date(primaryUser.dateOfBirth as string).getFullYear();
+    const primaryUserQuestionMap =
+      primaryUserAge >= 16 ? ADULT_QUESTIONS_MAP : KID_QUESTIONS_MAP;
 
     Object.keys(primaryUserMedicalData).forEach((key) => {
       const { answer, details } = primaryUserMedicalData[key];
       let questionText = primaryUserQuestionMap[key] || key; // Use mapped question text or fallback to key
 
       // Handle gender-specific questions for adults
-      if (primaryUserAge >= 16 && (key === "q23" || key === "q24") && primaryUser.salutation !== "Mevr.") {
+      if (
+        primaryUserAge >= 16 &&
+        (key === "q23" || key === "q24") &&
+        primaryUser.salutation !== "Mevr."
+      ) {
         return; // Skip if not a female adult
       }
 
-      let detailQuestionLabel = '';
+      let detailQuestionLabel = "";
+
       if (details) {
-        if (key === 'q4') { // Blood Pressure
-          detailQuestionLabel = 'Bloeddruk';
-        } else if (key === 'q15') { // Adult Diabetes
-          detailQuestionLabel = 'Gebruikt insuline';
-        } else if (key === 'q6' && primaryUserAge < 16) { // Kid Diabetes
-          detailQuestionLabel = 'Gebruikt insuline';
+        if (key === "q4") {
+          // Blood Pressure
+          detailQuestionLabel = "Bloeddruk";
+        } else if (key === "q15") {
+          // Adult Diabetes
+          detailQuestionLabel = "Gebruikt insuline";
+        } else if (key === "q6" && primaryUserAge < 16) {
+          // Kid Diabetes
+          detailQuestionLabel = "Gebruikt insuline";
         } else {
-          detailQuestionLabel = (primaryUserAge >= 16 ? ADULT_DETAIL_QUESTIONS_MAP[key] : KID_DETAIL_QUESTIONS_MAP[key]) || 'Details';
+          detailQuestionLabel =
+            (primaryUserAge >= 16
+              ? ADULT_DETAIL_QUESTIONS_MAP[key]
+              : KID_DETAIL_QUESTIONS_MAP[key]) || "Details";
         }
       }
-      templateParams[questionText] = `${answer}${details ? `
-${detailQuestionLabel}: ${details}` : ''}
+      templateParams[questionText] = `${answer}${
+        details
+          ? `
+${detailQuestionLabel}: ${details}`
+          : ""
+      }
 `;
     });
 
@@ -197,9 +225,11 @@ ${detailQuestionLabel}: ${details}` : ''}
 
     familyMemberKeys.forEach((key) => {
       const match = key.match(/familyMembers\[(\d+)\]\[([a-zA-Z0-9_]+)\]/);
+
       if (match) {
         const id = match[1];
         const field = match[2];
+
         if (!familyMembers[id]) familyMembers[id] = { id };
         familyMembers[id][field] = formData.get(key);
       }
@@ -209,43 +239,57 @@ ${detailQuestionLabel}: ${details}` : ''}
       (member) => member.firstName,
     );
 
-    templateParams["Aantal Gezinsleden"] = filteredFamilyMembers.length.toString();
-
-    
+    templateParams["Aantal Gezinsleden"] =
+      filteredFamilyMembers.length.toString();
 
     // --- Add Family Members to Template ---
     filteredFamilyMembers.forEach((member, index) => {
       const memberNumber = index + 1;
+
       templateParams[`Gezinslid ${memberNumber} - Aanhef`] = member.salutation;
       templateParams[`Gezinslid ${memberNumber} - Voornaam`] = member.firstName;
-      templateParams[`Gezinslid ${memberNumber} - Achternaam`] = member.lastName;
+      templateParams[`Gezinslid ${memberNumber} - Achternaam`] =
+        member.lastName;
       templateParams[`Gezinslid ${memberNumber} - Geboortedatum`] = formatDate(
         member.dateOfBirth,
       );
-      templateParams[`Gezinslid ${memberNumber} - Straatnaam`] = member.streetName;
-      templateParams[`Gezinslid ${memberNumber} - Huisnummer`] = member.houseNumber;
-      templateParams[`Gezinslid ${memberNumber} - Postcode`] = member.postalCode;
+      templateParams[`Gezinslid ${memberNumber} - Straatnaam`] =
+        member.streetName;
+      templateParams[`Gezinslid ${memberNumber} - Huisnummer`] =
+        member.houseNumber;
+      templateParams[`Gezinslid ${memberNumber} - Postcode`] =
+        member.postalCode;
       templateParams[`Gezinslid ${memberNumber} - Plaatsnaam`] = member.city;
-      templateParams[`Gezinslid ${memberNumber} - Telefoonnummer`] = member.phone;
+      templateParams[`Gezinslid ${memberNumber} - Telefoonnummer`] =
+        member.phone;
       templateParams[`Gezinslid ${memberNumber} - E-mail`] = member.email;
       templateParams[`Gezinslid ${memberNumber} - BSN Nummer`] = member.bsn;
-      templateParams[`Gezinslid ${memberNumber} - Huidige Tandarts Naam`]
-        = member.dentistName || "N/A";
+      templateParams[`Gezinslid ${memberNumber} - Huidige Tandarts Naam`] =
+        member.dentistName || "N/A";
 
       // Process medical data for the family member
       const medicalKeys = Array.from(formData.keys()).filter((key) =>
-        key.startsWith(`familyMembers[${member.id}][medical]`)
+        key.startsWith(`familyMembers[${member.id}][medical]`),
       );
 
-      const memberAge = new Date().getFullYear() - new Date(member.dateOfBirth as string).getFullYear();
-      const memberQuestionMap = memberAge >= 16 ? ADULT_QUESTIONS_MAP : KID_QUESTIONS_MAP;
+      const memberAge =
+        new Date().getFullYear() -
+        new Date(member.dateOfBirth as string).getFullYear();
+      const memberQuestionMap =
+        memberAge >= 16 ? ADULT_QUESTIONS_MAP : KID_QUESTIONS_MAP;
 
-      const medicalData: Record<string, { answer: string; details?: string }> = {};
+      const medicalData: Record<string, { answer: string; details?: string }> =
+        {};
+
       medicalKeys.forEach((key) => {
-        const medicalMatch = key.match(/familyMembers\[(\d+)\]\[medical\]\[(q\d+)(-details)?\]/);
+        const medicalMatch = key.match(
+          /familyMembers\[(\d+)\]\[medical\]\[(q\d+)(-details)?\]/,
+        );
+
         if (medicalMatch) {
           const qId = medicalMatch[2];
           const isDetails = medicalMatch[3];
+
           if (!medicalData[qId]) medicalData[qId] = { answer: "" };
 
           if (isDetails) {
@@ -260,29 +304,42 @@ ${detailQuestionLabel}: ${details}` : ''}
         let questionText = memberQuestionMap[qId] || qId; // Use mapped question text or fallback to qId
 
         // Handle gender-specific questions for adults
-        if (memberAge >= 16 && (qId === "q23" || qId === "q24") && member.salutation !== "Mevr.") {
+        if (
+          memberAge >= 16 &&
+          (qId === "q23" || qId === "q24") &&
+          member.salutation !== "Mevr."
+        ) {
           return; // Skip if not a female adult
         }
 
         const { answer, details } = medicalData[qId];
-        let detailQuestionLabel = '';
+        let detailQuestionLabel = "";
+
         if (details) {
-          if (qId === 'q4') { // Blood Pressure
-            detailQuestionLabel = 'Bloeddruk';
-          } else if (qId === 'q15') { // Adult Diabetes
-            detailQuestionLabel = 'Gebruikt insuline';
-          } else if (qId === 'q6' && memberAge < 16) { // Kid Diabetes
-            detailQuestionLabel = 'Gebruikt insuline';
+          if (qId === "q4") {
+            // Blood Pressure
+            detailQuestionLabel = "Bloeddruk";
+          } else if (qId === "q15") {
+            // Adult Diabetes
+            detailQuestionLabel = "Gebruikt insuline";
+          } else if (qId === "q6" && memberAge < 16) {
+            // Kid Diabetes
+            detailQuestionLabel = "Gebruikt insuline";
           } else {
-            detailQuestionLabel = (memberAge >= 16 ? ADULT_DETAIL_QUESTIONS_MAP[qId] : KID_DETAIL_QUESTIONS_MAP[qId]) || 'Details';
+            detailQuestionLabel =
+              (memberAge >= 16
+                ? ADULT_DETAIL_QUESTIONS_MAP[qId]
+                : KID_DETAIL_QUESTIONS_MAP[qId]) || "Details";
           }
         }
-        templateParams[`Gezinslid ${memberNumber} - ${questionText}`] = `${answer}${details ? `\n${detailQuestionLabel}: ${details}` : ''}\n`;
+        templateParams[`Gezinslid ${memberNumber} - ${questionText}`] =
+          `${answer}${details ? `\n${detailQuestionLabel}: ${details}` : ""}\n`;
       });
     });
 
     // --- Send Data ---
     const formcarryEndpoint = "https://formcarry.com/s/ILtNu--pNFt";
+
     try {
       const response = await fetch(formcarryEndpoint, {
         method: "POST",
@@ -344,8 +401,8 @@ ${detailQuestionLabel}: ${details}` : ''}
                 { value: "Dhr.", label: "Dhr." },
                 { value: "Mevr.", label: "Mevr." },
               ]}
-              onValueChange={setPrimaryUserSalutation}
               value={primaryUserSalutation}
+              onValueChange={setPrimaryUserSalutation}
             />
           </div>
           <FormField
@@ -461,7 +518,9 @@ ${detailQuestionLabel}: ${details}` : ''}
             Open Vragenlijst
           </Button>
           {primaryUserMedicalData && (
-            <span className="ml-4 text-green-600 font-semibold">✓ Ingevuld</span>
+            <span className="ml-4 text-green-600 font-semibold">
+              ✓ Ingevuld
+            </span>
           )}
           {!primaryUserDoB && (
             <p className="text-sm text-gray-500 mt-2">
@@ -474,14 +533,14 @@ ${detailQuestionLabel}: ${details}` : ''}
           Object.entries(primaryUserMedicalData).map(([key, value]) => (
             <Fragment key={key}>
               <input
-                type="hidden"
                 name={`medical[${key}]`}
+                type="hidden"
                 value={value.answer}
               />
               {value.details && (
                 <input
-                  type="hidden"
                   name={`medical[${key}-details]`}
+                  type="hidden"
                   value={value.details}
                 />
               )}
@@ -565,12 +624,12 @@ ${detailQuestionLabel}: ${details}` : ''}
       </form>
 
       <MedicalQuestionnaireModal
-        isOpen={isMedicalModalOpen}
-        onClose={() => setIsMedicalModalOpen(false)}
-        onSubmit={handlePrimaryUserMedicalSubmit}
         dateOfBirth={primaryUserDoB}
+        isOpen={isMedicalModalOpen}
         personName={primaryUserFirstName || "uzelf"}
         salutation={primaryUserSalutation}
+        onClose={() => setIsMedicalModalOpen(false)}
+        onSubmit={handlePrimaryUserMedicalSubmit}
       />
     </div>
   );

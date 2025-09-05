@@ -64,9 +64,7 @@ export default function Footer() {
                     <span className="text-gray-600 w-24 flex-shrink-0">
                       {item.day}
                     </span>
-                    <span className="ml-6 text-gray-600">
-                      {item.time}
-                    </span>
+                    <span className="ml-6 text-gray-600">{item.time}</span>
                   </div>
                 </li>
               ))}

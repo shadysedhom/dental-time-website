@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 import { RadioGroup, Radio } from "@heroui/radio";
 import { Input } from "@heroui/input";
 import { useState } from "react";
@@ -30,6 +30,7 @@ export default function MedicalQuestion({
 
   const handleDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newDetails = e.target.value;
+
     setDetails(newDetails);
     onValueChange({ answer: selectedValue, details: newDetails });
   };
@@ -44,13 +45,16 @@ export default function MedicalQuestion({
       </label>
       <RadioGroup
         className="mt-2"
+        isRequired={required}
         name={name}
         value={selectedValue}
         onValueChange={handleRadioChange}
-        isRequired={required}
       >
         {options.map((option) => (
-          <Radio key={`${name}-${option.split("-->")[0].trim()}`} value={option.split("-->")[0].trim()}>
+          <Radio
+            key={`${name}-${option.split("-->")[0].trim()}`}
+            value={option.split("-->")[0].trim()}
+          >
             {option.split("-->")[0].trim()}
           </Radio>
         ))}

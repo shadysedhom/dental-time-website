@@ -62,13 +62,13 @@ export default function AboutSection({
             <Image
               alt={altTag}
               className="rounded-xl object-cover"
+              height={450}
               src={imageSrc}
               style={{
                 aspectRatio: "16/9",
                 objectFit: "cover",
               }}
               width={800}
-              height={450}
             />
           </div>
         </div>

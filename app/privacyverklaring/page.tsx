@@ -96,24 +96,27 @@ export default function PrivacyverklaringPage() {
           <BulletPoint /> Internetbrowser en apparaat type
         </p>
 
-        <p className={sectionTitleStyling}>
-          Online Inschrijfformulier
-        </p>
+        <p className={sectionTitleStyling}>Online Inschrijfformulier</p>
 
         <p>
-        Wanneer u zich via het online inschrijfformulier aanmeldt, verwerken wij de door u ingevulde persoonsgegevens (zoals naam, contactgegevens, 
-        geboortedatum en – indien ingevuld – BSN-nummer) uitsluitend om uw inschrijving af te handelen en uw eerste afspraak in te plannen.
-        De gegevens worden versleuteld verzonden en opgeslagen bij Formcarry. <br /> <br />
-        
-        Formcarry slaat gegevens op binnen de Europese Economische Ruimte (EER). 
-        Zij dragen persoonsgegevens in de regel niet over buiten de EER. Dit is onderdeel van hun inzet voor privacy en veiligheid: 
-        gegevens worden opgeslagen in een regio met strenge wet- en regelgeving voor gegevensbescherming.
-        Bewaartermijn: de volledige inzending blijft maximaal 30 dagen op Formcarry-servers staan en wordt daarna automatisch verwijderd. 
-        De gegevens die wij nodig hebben voor uw patiëntendossier worden vóór die tijd veilig overgezet naar ons eigen 
-        praktijkmanagementsysteem; overige gegevens worden niet bewaard. <br /> <br />
-
-        U heeft het recht om uw gegevens in te zien, te corrigeren of te laten verwijderen.
-        Stuur hiervoor een e-mail naar info@dental-time.nl onder vermelding van “AVG-verzoek”.
+          Wanneer u zich via het online inschrijfformulier aanmeldt, verwerken
+          wij de door u ingevulde persoonsgegevens (zoals naam, contactgegevens,
+          geboortedatum en – indien ingevuld – BSN-nummer) uitsluitend om uw
+          inschrijving af te handelen en uw eerste afspraak in te plannen. De
+          gegevens worden versleuteld verzonden en opgeslagen bij Formcarry.{" "}
+          <br /> <br />
+          Formcarry slaat gegevens op binnen de Europese Economische Ruimte
+          (EER). Zij dragen persoonsgegevens in de regel niet over buiten de
+          EER. Dit is onderdeel van hun inzet voor privacy en veiligheid:
+          gegevens worden opgeslagen in een regio met strenge wet- en
+          regelgeving voor gegevensbescherming. Bewaartermijn: de volledige
+          inzending blijft maximaal 30 dagen op Formcarry-servers staan en wordt
+          daarna automatisch verwijderd. De gegevens die wij nodig hebben voor
+          uw patiëntendossier worden vóór die tijd veilig overgezet naar ons
+          eigen praktijkmanagementsysteem; overige gegevens worden niet bewaard.{" "}
+          <br /> <br />U heeft het recht om uw gegevens in te zien, te
+          corrigeren of te laten verwijderen. Stuur hiervoor een e-mail naar
+          info@dental-time.nl onder vermelding van “AVG-verzoek”.
         </p>
 
         <p className={sectionTitleStyling}>

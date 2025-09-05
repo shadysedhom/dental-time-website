@@ -2,8 +2,9 @@ import { Button } from "@heroui/button";
 import { useState, Fragment } from "react";
 
 import RadioGroup from "./RadioGroup";
-import FormField from "@/components/FormField";
 import MedicalQuestionnaireModal from "./MedicalQuestionnaireModal";
+
+import FormField from "@/components/FormField";
 
 // Family Member Form Component
 export default function FamilyMemberForm({
@@ -52,8 +53,8 @@ export default function FamilyMemberForm({
           { value: "Dhr.", label: "Dhr." },
           { value: "Mevr.", label: "Mevr." },
         ]}
-        onValueChange={setSalutation}
         value={salutation}
+        onValueChange={setSalutation}
       />
 
       <div className="grid gap-4 sm:grid-cols-2 mt-4">
@@ -162,14 +163,14 @@ export default function FamilyMemberForm({
         Object.entries(medicalData).map(([key, value]) => (
           <Fragment key={key}>
             <input
-              type="hidden"
               name={`${namePrefix}[medical][${key}]`}
+              type="hidden"
               value={value.answer}
             />
             {value.details && (
               <input
-                type="hidden"
                 name={`${namePrefix}[medical][${key}-details]`}
+                type="hidden"
                 value={value.details}
               />
             )}
@@ -177,12 +178,12 @@ export default function FamilyMemberForm({
         ))}
 
       <MedicalQuestionnaireModal
-        isOpen={isMedicalModalOpen}
-        onClose={() => setIsMedicalModalOpen(false)}
-        onSubmit={handleMedicalSubmit}
         dateOfBirth={dateOfBirth}
+        isOpen={isMedicalModalOpen}
         personName={firstName || `Gezinslid ${index + 1}`}
         salutation={salutation}
+        onClose={() => setIsMedicalModalOpen(false)}
+        onSubmit={handleMedicalSubmit}
       />
     </div>
   );

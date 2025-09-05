@@ -127,9 +127,7 @@ export default function ContactSection() {
                   <span className="text-black w-24 flex-shrink-0">
                     {item.day}
                   </span>
-                  <span className="ml-6 text-black">
-                    {item.time}
-                  </span>
+                  <span className="ml-6 text-black">{item.time}</span>
                 </p>
               ))}
             </div>
@@ -138,7 +136,6 @@ export default function ContactSection() {
           {/* Right Column - Form */}
           <div className="flex items-center p-6 md:p-8 bg-white">
             <form className="space-y-6 w-full" onSubmit={handleSubmit}>
-
               {/* First & Last Name */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <FormField
