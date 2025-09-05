@@ -1,3 +1,4 @@
+import React from 'react';
 import { Input } from "@heroui/input";
 
 // Reusable FormField Component
@@ -9,6 +10,7 @@ export default function FormField({
   required = false,
   disabled = false,
   autoComplete,
+  onValueChange,
 }: {
   label: string;
   name: string;
@@ -17,7 +19,14 @@ export default function FormField({
   required?: boolean;
   disabled?: boolean;
   autoComplete?: string;
+  onValueChange?: (value: string) => void;
 }) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onValueChange) {
+      onValueChange(e.target.value);
+    }
+  };
+
   return (
     <div>
       <label
@@ -36,6 +45,7 @@ export default function FormField({
         radius="sm"
         required={required}
         type={type}
+        onChange={handleChange}
       />
     </div>
   );

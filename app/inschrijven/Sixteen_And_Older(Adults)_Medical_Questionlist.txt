@@ -1,0 +1,167 @@
+Medical questions:
+```
+Q: Is er de agelopen maanden iets aan uw gezondheid veranderd?
+
+Answer options:
+- Nee
+- Ja --> zo ja, wat?
+
+Q: Bent u ergens allergisch voor?
+
+Answer options:
+- Nee
+- Ja --> zo ja, waarvoor?
+
+Q: Heeft u een hartinfarct gehad?
+
+Answer options:
+- Nee
+- Ja --> zo ja, wanneer?
+
+Q: Heeft u last van hartkloppingen?
+A: 
+- Nee
+- Ja
+
+Q: Wordt u voor hoge bloeddruk behandeld?
+A:
+- Nee
+- Ja --> Wat is uw bloeddruk?
+Onderdruk: 
+Bovendruk: 
+
+Q: Heeft u pijn op de borst bij inspanning?
+
+A:
+- Nee
+- Ja
+
+Q: Wordt u kortademig als u plat in bed ligt?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u een hartklepgebrek of een kunsthartklep?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u een aangeboren hartafwijking?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u wel eens een endocarditis (ontsteking aan het hart) doorgemaakt?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u een pacemaker (of ICD) of neurostimulator?
+
+A:
+- Nee
+- Ja
+
+Q: Bent u ooit flauwgevallen bij een tandheelkundige of medische behandeling?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u epilepsie, vallende ziekte?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u wel eens een hersenbloeding of beroerte (of TIA) gehad?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u last van longklachten zoals astma, bronchitis of chronische hoest?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u suikerziekte?
+
+A:
+- Nee
+- Ja --> Gebruikt u insuline? -Nee -Ja
+
+Q: Heeft u bloedarmoede?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u wel eens langdurige bloedingen gehad na het trekken van tanden/kiezen of na een operatie?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u hepatitis, geelzucht of andere leverziekte (gehad)?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u een nierziekte?
+
+A:
+- Nee
+- Ja
+
+Q: Heeft u reuma en/of chronische gewrichtsklachten?
+
+A:
+- Nee
+- Ja
+
+Q: Bent u bestraald vanwege een tumor in hoofd of hals?
+
+A:
+- Nee
+- Ja
+
+Q: Rookt u?
+
+A:
+- Nee
+- Ja --> Hoeveel per dag?
+
+Q (ONLY FOR WOMEN): Bent u zwanger?
+A:
+- Nee
+- Ja
+
+Q (ONLY FOR WOMEN): Geeft u borstvoeding?
+A:
+- Nee
+- Ja
+
+Q: Heeft u een ziekte of aandoening waar niet naar is gevraagd?
+
+A:
+- Nee
+- Ja --> Welke?
+
+Q: Heeft u in het verleden een geneesmiddel gebruikt tegen o.a. botontkalking (een bisfosfonaat of denosumab)?
+A: 
+- Nee
+- Ja --> Welke?
+
+Q: Gebruikt u medicijnen?
+A:
+- Nee
+- Ja --> Welke?
+
+```

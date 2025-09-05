@@ -21,7 +21,7 @@ export default function TextAreaField({
         {label}
       </label>
       <Textarea
-        className="min-h-[120px] w-full"
+        className="w-full"
         disabled={disabled}
         id={name}
         name={name}

@@ -5,12 +5,16 @@ export default function RadioGroup({
   options,
   required = false,
   disabled = false,
+  value,
+  onValueChange,
 }: {
   name: string;
   label?: string;
   options: { value: string; label: string }[];
   required?: boolean;
   disabled?: boolean;
+  value?: string;
+  onValueChange?: (value: string) => void;
 }) {
   return (
     <fieldset>
@@ -28,6 +32,8 @@ export default function RadioGroup({
               required={required}
               type="radio"
               value={option.value}
+              checked={value === option.value}
+              onChange={(e) => onValueChange && onValueChange(e.target.value)}
             />
             <span className="ml-2 text-sm text-gray-700">{option.label}</span>
           </label>

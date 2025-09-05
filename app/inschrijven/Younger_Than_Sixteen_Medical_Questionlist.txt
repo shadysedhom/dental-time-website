@@ -1,0 +1,79 @@
+Medical questions:
+```
+Q: Is er de agelopen maanden iets aan de gezondheid van uw kind veranderd?
+
+Answer options:
+- Nee
+- Ja --> zo ja, wat?
+
+Q: Is uw kind onder behandeling van een (huis)arts of medisch specialist?
+A:
+- Nee
+- Ja --> Waarvoor?
+
+Q: Is uw kind allergisch?
+A:
+- Nee
+- Ja --> Waarvoor?
+
+Q: Heeft uw kind een aangeboren hartafwijking?
+A:
+- Nee
+- Ja --> Toelichting:
+
+Q: Heeft uw kind epilepsie?
+A:
+- Nee
+- Ja
+
+Q: Heeft uw kind astma, chronische bronchitis of een andere chronische longziekte?
+A:
+- Nee
+- Ja
+
+Q: Heeft uw kind suikerziekte?
+A:
+- Nee
+- Ja --> Gebruikt uw kind insuline? -Nee -Ja
+
+Q: Heeft uw kind bloedarmoede?
+A:
+- Nee
+- Ja
+
+Q: Heeft uw kind hepatitis of andere leverziekte?
+A:
+- Nee
+- Ja
+
+Q: Heeft uw kind een nierziekte?
+A:
+- Nee
+- Ja
+
+Q: Heeft u kind problemen met de voeding of maag-darmklachten?
+A:
+- Nee
+- Ja
+
+Q: Is uw kind angstig of hyperactief of heeft het andere gedragsproblemen?
+A:
+- Nee
+- Ja
+
+Q: Volgt uw kind speciaal onderwijs of bezoekt het een medisch dagverblijf?
+A:
+- Nee
+- Ja
+
+Q: Heeft uw kind een ziekte of aandoening waar niet naar is gevraagd?
+A:
+- Nee
+- Ja --> Welke?
+
+Q: Gebruikt u kind momenteel medicijnen?
+A:
+- Nee
+- Ja --> Welke?
+
+```
