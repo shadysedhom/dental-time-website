@@ -3,6 +3,7 @@
 import { useState, useEffect, Fragment } from "react";
 import { Button } from "@heroui/button";
 import { Alert } from "@heroui/alert";
+import { Input } from "@heroui/input";
 import { Checkbox } from "@heroui/checkbox";
 import NextLink from "next/link";
 import { link as linkStyles } from "@heroui/theme";
@@ -44,6 +45,7 @@ export default function RegistrationForm({
   const [addFamilyMembers, setAddFamilyMembers] = useState(false);
   const [familyMemberIds, setFamilyMemberIds] = useState<number[]>([]);
   const [nextId, setNextId] = useState(0);
+  const [numFamilyMembersToAdd, setNumFamilyMembersToAdd] = useState(1);
 
   // State for primary user's medical questionnaire
   const [isMedicalModalOpen, setIsMedicalModalOpen] = useState(false);
@@ -65,8 +67,15 @@ export default function RegistrationForm({
 
   // Helper function to add a new family member to the array
   const addFamilyMember = () => {
-    setFamilyMemberIds([...familyMemberIds, nextId]);
-    setNextId(nextId + 1);
+    const newIds = [];
+    let currentNextId = nextId;
+
+    for (let i = 0; i < numFamilyMembersToAdd; i++) {
+      newIds.push(currentNextId);
+      currentNextId++;
+    }
+    setFamilyMemberIds([...familyMemberIds, ...newIds]);
+    setNextId(currentNextId);
   };
 
   // Helper function to remove a family member from the array
@@ -557,15 +566,31 @@ ${detailQuestionLabel}: ${details}`
             onValueChange={setAddFamilyMembers}
           />
           <label className="text-sm text-gray-700" htmlFor="addFamilyMembers">
-            Ik wil graag ook een gezinslid inschrijven
+            Ik wil graag ook gezinsleden inschrijven
           </label>
         </div>
 
         {addFamilyMembers && (
           <div className="mt-4">
-            <Button disabled={isSubmitting} onPress={addFamilyMember}>
-              Gezinslid Toevoegen
-            </Button>
+            <div className="flex items-center gap-4 mb-4">
+              <Input
+                className="w-24"
+                disabled={isSubmitting}
+                min="1"
+                type="number"
+                value={String(numFamilyMembersToAdd)}
+                onChange={(e) =>
+                  setNumFamilyMembersToAdd(
+                    Math.max(1, parseInt(e.target.value, 10) || 1),
+                  )
+                }
+              />
+              <Button disabled={isSubmitting} onPress={addFamilyMember}>
+                {numFamilyMembersToAdd > 1
+                  ? "Gezinsleden Toevoegen"
+                  : "Gezinslid Toevoegen"}
+              </Button>
+            </div>
             {familyMemberIds.map((id, arrayIndex) => (
               <FamilyMemberForm
                 key={id}
