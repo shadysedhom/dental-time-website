@@ -144,7 +144,7 @@ export default function RegistrationForm({
 
     setIsSubmitting(true);
 
-    // --- Primary User Data ---
+    // --- Primary User Data Object ---
     const primaryUser = {
       salutation: formData.get("salutation"),
       firstName: formData.get("firstName"),
@@ -161,30 +161,41 @@ export default function RegistrationForm({
       message: formData.get("message"),
     };
 
-    // --- Prepare Email Template ---
+    // --- Prepare Email Template Parameters ---
     const templateParams: Record<string, any> = {
-      Aanhef: primaryUser.salutation,
-      Voornaam: primaryUser.firstName,
-      Achternaam: primaryUser.lastName,
-      Geboortedatum: primaryUser.dateOfBirth,
-      Straatnaam: primaryUser.streetName,
-      Huisnummer: primaryUser.houseNumber,
-      Postcode: primaryUser.postalCode,
-      Plaatsnaam: primaryUser.city,
-      Telefoonnummer: primaryUser.phone,
+      "Aanhef": primaryUser.salutation,
+      "Voornaam": primaryUser.firstName,
+      "Achternaam": primaryUser.lastName,
+      "Geboortedatum": primaryUser.dateOfBirth,
+      "Straatnaam": primaryUser.streetName,
+      "Huisnummer": primaryUser.houseNumber,
+      "Postcode": primaryUser.postalCode,
+      "Plaatsnaam": primaryUser.city,
+      "Telefoonnummer": primaryUser.phone,
       "E-mail": primaryUser.email,
-      BSN: primaryUser.bsn,
+      "BSN": primaryUser.bsn,
       "Huidige Tandarts": primaryUser.dentistName || "N/A",
-      Opmerkingen: primaryUser.message || "N/A",
+      "Opmerkingen": primaryUser.message || "N/A",
     };
 
-    // --- Primary User Medical Data ---
-    const primaryUserAge =
-      new Date().getFullYear() -
-      new Date(primaryUser.dateOfBirth as string).getFullYear();
+    // ------ Primary User Medical Data ------
+
+    // - Age Calculation -
+    const dobString = formData.get("dateOfBirth") as string;
+    const today = new Date();
+    const birthDate = new Date(dobString);
+    let primaryUserAge = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      primaryUserAge--;
+    }
+
+    // - Use Age to Get Right Questions -
     const primaryUserQuestionMap =
       primaryUserAge >= 16 ? ADULT_QUESTIONS_MAP : KID_QUESTIONS_MAP;
 
+    
     Object.keys(primaryUserMedicalData).forEach((key) => {
       const { answer, details } = primaryUserMedicalData[key];
       let questionText = primaryUserQuestionMap[key] || key; // Use mapped question text or fallback to key
@@ -220,10 +231,10 @@ export default function RegistrationForm({
       templateParams[questionText] = `${answer}${
         details
           ? `
-${detailQuestionLabel}: ${details}`
+            ${detailQuestionLabel}: ${details}`
           : ""
-      }
-`;
+        }
+        `;
     });
 
     // --- Family Members Data ---
@@ -281,9 +292,17 @@ ${detailQuestionLabel}: ${details}`
         key.startsWith(`familyMembers[${member.id}][medical]`),
       );
 
-      const memberAge =
-        new Date().getFullYear() -
-        new Date(member.dateOfBirth as string).getFullYear();
+      // - Family Member Age Calculation -
+      const memberDob = new Date(member.dateOfBirth as string);
+      const today = new Date();
+      let memberAge = today.getFullYear() - memberDob.getFullYear();
+      const m = today.getMonth() - memberDob.getMonth();
+
+      if (m < 0 || (m === 0 && today.getDate() < memberDob.getDate())) {
+        memberAge--;
+      }
+
+      // - Use Age to get right questions -
       const memberQuestionMap =
         memberAge >= 16 ? ADULT_QUESTIONS_MAP : KID_QUESTIONS_MAP;
 
