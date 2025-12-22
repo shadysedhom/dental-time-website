@@ -162,10 +162,14 @@ export default function AlgemeneVoorwaardenPage() {
         <p className={sectionTitleStyling}>10. Klachtenregeling</p>
 
         <p>
-          Mocht u onverhoopt een klacht hebben over de geleverde zorg of
-          dienstverlening, dan verzoeken wij u contact met ons op te nemen.
-          Dental Time is aangesloten bij een erkende klachtenregeling conform de
-          Wet kwaliteit, klachten en geschillen zorg (Wkkgz).
+          Mocht u onverhoopt een klacht hebben over de geleverde mondzorg of
+          dienstverlening, dan gaan wij graag met u in gesprek om samen tot een
+          oplossing te komen. Binnen onze praktijk is tandarts G.A. Youssef 
+          verantwoordelijk voor de afhandeling van klachten. U kunt de tandarts
+          bereiken via <CustomLink href="mailto:info@dental-time.nl">info@dental-time.nl</CustomLink> of <CustomLink href="tel:0306049005">030 604 9005</CustomLink>.
+        </p>
+        <p className="mt-2">
+          Komen we er samen niet uit? Dan kunt u gebruik maken van de <CustomLink href="https://knmt.nl/media/44721">KNMT Klachtenregeling Mondzorg</CustomLink> voor klachtbemiddeling. Mocht ook dit niet tot een oplossing leiden, dan kunt u zich wenden tot de <CustomLink href="https://www.geschilleninstantiemondzorg.nl">Stichting Geschilleninstantie Mondzorg (SGIM)</CustomLink>.
         </p>
       </div>
 
