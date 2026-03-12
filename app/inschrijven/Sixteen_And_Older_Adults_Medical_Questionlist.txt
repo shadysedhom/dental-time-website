@@ -164,4 +164,18 @@ A:
 - Nee
 - Ja --> Welke?
 
+Q: Is er sprake van bewind voering?
+A:
+- Nee
+- Ja --> ## Contactgegevens Bewindvoerder:
+         Telefoonnummer: [E-mailinput]
+         E-mail: [Phone number input]
+
+Q: Heeft u een begeleider of contactpersoon?
+A:
+- Nee
+- Ja --> ## Contactgegevens Begeleider:
+         Telefoonnummer: [E-mailinput]
+         E-mail: [Phone number input]
+
 ```

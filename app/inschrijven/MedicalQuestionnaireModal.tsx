@@ -37,6 +37,8 @@ export const ADULT_QUESTIONS_MAP: Record<string, string> = {
   q25: "Heeft u een ziekte of aandoening waar niet naar is gevraagd?",
   q26: "Heeft u in het verleden een geneesmiddel gebruikt tegen o.a. botontkalking (een bisfosfonaat of denosumab)?",
   q27: "Gebruikt u medicijnen?",
+  q28: "Is er sprake van bewind voering?",
+  q29: "Heeft u een begeleider of contactpersoon?",
 };
 
 export const KID_QUESTIONS_MAP: Record<string, string> = {
@@ -65,6 +67,8 @@ export const ADULT_DETAIL_QUESTIONS_MAP: Record<string, string> = {
   q25: "Welke ziekte of aandoening?",
   q26: "Welk geneesmiddel?",
   q27: "Welke medicijnen?",
+  q28: "Contactgegevens Bewindvoerder",
+  q29: "Contactgegevens Begeleider",
 };
 
 export const KID_DETAIL_QUESTIONS_MAP: Record<string, string> = {
@@ -105,6 +109,8 @@ const SIXTEEN_AND_OLDER_QUESTION_IDS = [
   "q25",
   "q26",
   "q27",
+  "q28",
+  "q29",
 ];
 
 const YOUNGER_THAN_SIXTEEN_QUESTION_IDS = [
@@ -291,6 +297,97 @@ const DiabetesQuestion = ({
               Ja
             </Radio>
           </RadioGroup>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Special component for the contact details question
+const ContactDetailsQuestion = ({
+  question,
+  questionId,
+  onQuestionChange,
+  contactLabel,
+}: {
+  question: string;
+  questionId: string;
+  onQuestionChange: FormProps["onQuestionChange"];
+  contactLabel: string;
+}) => {
+  const [answer, setAnswer] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    const details =
+      answer === "Ja"
+        ? `Naam: ${name}, Telefoonnummer: ${phone}, E-mail: ${email}`
+        : "";
+
+    onQuestionChange(questionId, { answer, details });
+  }, [answer, name, phone, email, onQuestionChange, questionId]);
+
+  return (
+    <div className="py-4 border-b">
+      <label className="font-semibold text-gray-800">
+        {question} <span className="text-red-500">*</span>
+      </label>
+      <RadioGroup
+        isRequired
+        className="mt-2"
+        name={questionId}
+        value={answer}
+        onValueChange={setAnswer}
+      >
+        <Radio key={`${questionId}-Nee`} value="Nee">
+          Nee
+        </Radio>
+        <Radio key={`${questionId}-Ja`} value="Ja">
+          Ja
+        </Radio>
+      </RadioGroup>
+
+      {answer === "Ja" && (
+        <div className="mt-4 ml-6 space-y-4">
+          <p className="text-sm font-semibold text-gray-700">
+            Contactgegevens {contactLabel}
+          </p>
+          <div className="grid grid-cols-1 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Naam
+              </label>
+              <Input
+                placeholder="Naam"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Telefoonnummer
+              </label>
+              <Input
+                placeholder="Telefoonnummer"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                E-mail
+              </label>
+              <Input
+                placeholder="E-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
         </div>
       )}
     </div>
@@ -491,6 +588,18 @@ const SixteenAndOlderForm = ({ onQuestionChange, salutation }: FormProps) => (
       options={["Nee", "Ja --> Welke medicijnen?"]}
       question="Gebruikt u medicijnen?"
       onValueChange={(value) => onQuestionChange("q27", value)}
+    />
+    <ContactDetailsQuestion
+      contactLabel="Bewindvoerder"
+      question="Is er sprake van bewind voering?"
+      questionId="q28"
+      onQuestionChange={onQuestionChange}
+    />
+    <ContactDetailsQuestion
+      contactLabel="Begeleider"
+      question="Heeft u een begeleider of contactpersoon?"
+      questionId="q29"
+      onQuestionChange={onQuestionChange}
     />
   </>
 );
