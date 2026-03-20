@@ -42,7 +42,7 @@ export const siteConfig = {
     },
     {
       label: "Route",
-      href: "https://maps.app.goo.gl/7SePSo3Ta4GdoB7d9",
+      href: "https://maps.app.goo.gl/x1usR2bYpxEx1ebV8",
     },
   ],
   navMenuItems: [
@@ -61,7 +61,7 @@ export const siteConfig = {
     },
     {
       label: "Route",
-      href: "https://maps.app.goo.gl/7SePSo3Ta4GdoB7d9",
+      href: "https://maps.app.goo.gl/x1usR2bYpxEx1ebV8",
     },
     {
       label: "Inschrijven",
@@ -112,7 +112,7 @@ export const siteConfig = {
     {
       icon: "MapPin",
       label: "Waardijnburg 3, 3437 AR Nieuwegein",
-      href: "https://maps.app.goo.gl/7SePSo3Ta4GdoB7d9",
+      href: "https://maps.app.goo.gl/x1usR2bYpxEx1ebV8",
     },
   ],
 };
