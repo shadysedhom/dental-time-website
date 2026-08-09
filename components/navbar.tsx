@@ -13,80 +13,58 @@ import { Button } from "@heroui/button";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { UserPlus } from "lucide-react";
+import { useState } from "react";
 
 import { siteConfig } from "@/config/site";
 import CustomLink from "@/components/CustomLink";
 
 export const Navbar = () => {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   if (pathname === "/nieuwe-patienten-inschrijven") return null;
 
   return (
     <HeroUINavbar
-      className=" fixed top-0 z-20 py-2 px-6 bg-zinc-100 bg-opacity-60 mx-auto md:rounded-md md:mt-3 md:w-5/6 "
+      className="!fixed inset-x-0 top-3 z-50 mx-auto w-[calc(100%-1.5rem)] rounded-2xl border border-white/80 !bg-[#fbfaf7] !bg-opacity-90 px-3 py-1 shadow-[0_12px_40px_rgba(17,24,43,0.14)] backdrop-blur-2xl sm:px-5 md:w-5/6 md:max-w-6xl"
+      isMenuOpen={isMenuOpen}
       maxWidth="xl"
-      position="sticky"
+      position="static"
+      shouldBlockScroll={false}
+      onMenuOpenChange={setIsMenuOpen}
     >
-      <style jsx>{`
-        @keyframes gradientShine {
-          0% {
-            background-position: 0% 50%;
-          }
-          25% {
-            background-position: 50% 100%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          75% {
-            background-position: 50% 0%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-
-        :global(.shining-gradient) {
-          background: repeating-linear-gradient(
-            240deg,
-            #fff,
-            /* Almost white */ #d8d8d8,
-            /* Light gray */ #b8d5e0 /* Light blue */
-          );
-          background-size: 200% 200%;
-          animation: gradientShine 8s ease-in-out infinite;
-        }
-      `}</style>
-
-      {/* ------------------          Desktop Navbar       ---------------------- */}
       <NavbarContent
-        className="basis-2/5 sm:basis-full justify-center"
+        className="basis-2/5 justify-center sm:basis-full"
         justify="center"
       >
-        {/* Logo */}
         <NavbarBrand as="div" className="gap-3">
           <NextLink
-            className="flex justify-start items-center gap-1 h-10"
+            className="flex h-14 items-center justify-start px-1 md:h-16"
             href="/"
           >
             <Image
               priority
-              height={100}
-              src="/dental-time-gold.svg" // h-full for mobile, h-16 for tablet and larger
-              width={100}
               alt="Dental Time Logo (Navbar)"
-              // className=" h-full md:h-16 w-auto" // h-full for mobile, h-16 for tablet and larger
-              className=" h-16 md:h-24 w-auto"
+              className="h-12 w-auto drop-shadow-[0_1px_1px_rgba(17,24,43,0.14)] md:h-16"
+              height={78}
+              src="/dental-time-gold.svg"
+              width={148}
             />
           </NextLink>
         </NavbarBrand>
 
-        {/* Navbar Menu */}
-        <ul className="hidden grow lg:flex gap-16 justify-center mx-auto">
+        <ul className="mx-auto hidden grow justify-center gap-10 lg:flex xl:gap-14">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
-              <CustomLink className=" text-lg uppercase " href={item.href}>
+              <CustomLink
+                navbar
+                className={`text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${
+                  pathname === item.href
+                    ? "!text-[#8d6a25]"
+                    : "!text-[#11182b] hover:!text-[#8d6a25]"
+                }`}
+                href={item.href}
+              >
                 {item.label}
               </CustomLink>
             </NavbarItem>
@@ -95,61 +73,40 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
+        className="hidden basis-1/5 sm:flex sm:basis-full"
         justify="end"
-      >
-        {/* Signup Button // Moved to Hero Section
-        <NavbarItem className="hidden md:flex">
-          <Button
-            as={Link}
-            href="/inschrijven"
-            className="text-sm font-normal text-white rounded-md uppercase "
-            color="primary"
-            variant="solid"
-            startContent={<UserPlus className="text-white" />}
-          >
-            Inschrijven
-          </Button>
-        </NavbarItem> */}
+      />
+
+      <NavbarContent className="basis-1 pl-4 sm:hidden" justify="end">
+        <NavbarMenuToggle className="h-11 w-11" />
       </NavbarContent>
 
-      {/* ---------------------       Mobile Navbar          ---------------------- */}
-
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <NavbarMenuToggle />
-      </NavbarContent>
-
-      <NavbarMenu className="mt-4 rounded-t-lg shining-gradient shadow-lg">
-        <div className="mx-4 mt-2 flex flex-col gap-4">
+      <NavbarMenu className="mt-4 rounded-t-[1.5rem] bg-[#fbfaf7]/98 px-4 pt-6 shadow-2xl backdrop-blur-xl">
+        <div className="mx-auto flex w-full max-w-md flex-col gap-3">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <NextLink href={item.href}>
-                <Button
-                  className={`w-full text-left rounded-lg py-4 text-lg ${
-                    index === siteConfig.navMenuItems.length - 1
-                      ? "shadow-md"
-                      : "hover:bg-gray-300"
-                  }`}
-                  color={
-                    index === siteConfig.navMenuItems.length - 1
-                      ? "primary"
-                      : "default"
-                  }
-                  href={item.href}
-                  size="lg"
-                  variant={
-                    index === siteConfig.navMenuItems.length - 1
-                      ? "solid"
-                      : "ghost"
-                  }
-                >
-                  {index === siteConfig.navMenuItems.length - 1 ? (
-                    <UserPlus />
-                  ) : null}
+              <Button
+                as={NextLink}
+                className={`w-full rounded-xl py-4 text-left text-base font-semibold ${
+                  index === siteConfig.navMenuItems.length - 1
+                    ? "border border-[#b88e32] bg-[#d7b45a] text-[#11182b] shadow-[0_10px_25px_rgba(177,138,54,0.2)]"
+                    : "text-[#11182b] hover:bg-[#f3ead8]"
+                }`}
+                href={item.href}
+                size="lg"
+                variant={
+                  index === siteConfig.navMenuItems.length - 1
+                    ? "solid"
+                    : "ghost"
+                }
+                onPress={() => setIsMenuOpen(false)}
+              >
+                {index === siteConfig.navMenuItems.length - 1 ? (
+                  <UserPlus />
+                ) : null}
 
-                  {item.label}
-                </Button>
-              </NextLink>
+                {item.label}
+              </Button>
             </NavbarMenuItem>
           ))}
         </div>

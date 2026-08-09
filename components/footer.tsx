@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 
@@ -11,7 +9,7 @@ import { siteConfig } from "@/config/site";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const iconStyling = "h-4 w-4 text-gray-500 mr-2";
+  const iconStyling = "mr-2 h-4 w-4 text-[#d7b45a]";
   const iconMap = {
     Phone: <Phone className={iconStyling} />,
     Mail: <Mail className={iconStyling} />,
@@ -19,7 +17,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full border-t bg-white px-4 pt-12 pb-6 md:pt-16 text-left">
+    <footer className="w-full border-t border-[#d7b45a]/15 bg-[#0c1222] px-4 pb-7 pt-14 text-left text-white md:pt-20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid gap-10 lg:grid-cols-5">
           {/* Logo and Description Column */}
@@ -27,14 +25,14 @@ export default function Footer() {
             {/* Footer Logo */}
             <Image
               alt="Dental Time Logo"
-              className=" h-24 w-auto"
+              className="h-24 w-auto"
               height={100}
               src="/dental-time-gold.svg"
               width={100}
             />
 
             {/* Mission statement */}
-            <p className="mt-4 max-w-xs text-gray-600 leading-loose">
+            <p className="mt-5 max-w-sm leading-8 text-white/60">
               Uw glimlach is onze zorg. Bij Dental Time bieden we aandachtige
               tandheelkundige zorg. Samen werken we aan een stralende, gezonde
               lach.
@@ -54,7 +52,7 @@ export default function Footer() {
 
           {/* Openingtimes Column */}
           <div>
-            <h3 className="text-lg font-semibold text-navy-900 uppercase">
+            <h3 className="font-serif text-xl font-semibold text-[#efd897]">
               Openingstijden
             </h3>
 
@@ -62,10 +60,10 @@ export default function Footer() {
               {siteConfig.openingTimes.map((item, index) => (
                 <li key={`${item.day}-${index}`}>
                   <div className="flex">
-                    <span className="text-gray-600 w-24 flex-shrink-0">
+                    <span className="w-24 flex-shrink-0 text-white/55">
                       {item.day}
                     </span>
-                    <span className="ml-6 text-gray-600">{item.time}</span>
+                    <span className="ml-6 text-white/75">{item.time}</span>
                   </div>
                 </li>
               ))}
@@ -74,45 +72,59 @@ export default function Footer() {
 
           {/* Footer Menu Column */}
           <div>
-            <h3 className="text-lg font-semibold text-navy-900 uppercase">
+            <h3 className="font-serif text-xl font-semibold text-[#efd897]">
               Menu
             </h3>
 
             <ul className="mt-4 space-y-3">
               {siteConfig.navMenuItems.map((item, index) => (
                 <li key={`${item}-${index}`}>
-                  <CustomLink href={item.href}>{item.label}</CustomLink>
+                  <CustomLink
+                    className="!text-white/65 hover:!text-[#efd897]"
+                    href={item.href}
+                  >
+                    {item.label}
+                  </CustomLink>
                 </li>
               ))}
 
               <li>
-                <CustomLink href="/algemene-voorwaarden">
+                <CustomLink
+                  className="!text-white/65 hover:!text-[#efd897]"
+                  href="/algemene-voorwaarden"
+                >
                   Algemene voorwaarden
                 </CustomLink>
               </li>
 
               <li>
-                <CustomLink href="/privacyverklaring">
+                <CustomLink
+                  className="!text-white/65 hover:!text-[#efd897]"
+                  href="/privacyverklaring"
+                >
                   Privacyverklaring
                 </CustomLink>
               </li>
 
               <li>
-                <CookieSettingsButton className="text-left text-primary underline-offset-4 hover:underline" />
+                <CookieSettingsButton className="text-left text-white/65 underline-offset-4 hover:text-[#efd897] hover:underline" />
               </li>
             </ul>
           </div>
 
           {/* Contact Column */}
           <div>
-            <h3 className="text-lg font-semibold text-navy-900 uppercase">
+            <h3 className="font-serif text-xl font-semibold text-[#efd897]">
               Contact
             </h3>
 
             <ul className="mt-4 space-y-3">
               {siteConfig.contactMenuItems.map((item, index) => (
                 <li key={`${item}-${index}`}>
-                  <CustomLink href={item.href}>
+                  <CustomLink
+                    className="!text-white/65 hover:!text-[#efd897]"
+                    href={item.href}
+                  >
                     {iconMap[item.icon as keyof typeof iconMap]}
                     {item.label}
                   </CustomLink>
@@ -123,8 +135,8 @@ export default function Footer() {
         </div>
 
         {/* Footer Bottom Section */}
-        <div className="mt-10 border-t pt-6">
-          <p className="text-center text-sm text-gray-600">
+        <div className="mt-12 border-t border-white/10 pt-7">
+          <p className="text-center text-sm text-white/45">
             © {currentYear} Dental Time B.V. Alle rechten voorbehouden.
           </p>
         </div>

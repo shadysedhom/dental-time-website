@@ -18,7 +18,7 @@ export default function CustomLink({
   navbar = false,
 }: CustomLinkProps) {
   const linkStyling =
-    "absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full";
+    "absolute -bottom-1 left-0 h-px w-0 bg-[#b88e32] transition-all duration-300 group-hover:w-full";
 
   const isExternal =
     href.startsWith("http") ||
