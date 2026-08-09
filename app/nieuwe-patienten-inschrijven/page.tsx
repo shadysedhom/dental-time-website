@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Uw nieuwe tandarts in Nieuwegein. Schrijf uzelf of uw gezin eenvoudig online in.",
     url: "https://www.dental-time.nl/nieuwe-patienten-inschrijven",
-    images: ["/new-patients-consultation.jpg"],
+    images: ["/dentist-explaining.png"],
     locale: "nl_NL",
     siteName: "Dental Time",
     type: "website",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "Nieuwe patiënten welkom bij Dental Time",
     description:
       "Schrijf uzelf of uw gezin online in bij Dental Time in Nieuwegein.",
-    images: ["/new-patients-consultation.jpg"],
+    images: ["/dentist-explaining.png"],
   },
 };
 
@@ -211,7 +211,7 @@ export default function NewPatientsRegistrationPage() {
                     className="object-cover"
                     fill
                     sizes="(max-width: 1024px) 100vw, 44vw"
-                    src="/new-patients-consultation.jpg"
+                    src="/dentist-explaining.png"
                   />
                   <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/20 bg-[#11182b]/80 p-4 text-white shadow-xl backdrop-blur-xl sm:inset-x-5 sm:bottom-5">
                     <p className="font-serif text-lg font-semibold">
