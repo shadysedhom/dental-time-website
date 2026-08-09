@@ -67,7 +67,7 @@ export default function ContactSection() {
             "Er is een fout opgetreden bij het verzenden van uw bericht. Probeer het aub later nog eens.",
         });
       }
-    } catch (error) {
+    } catch {
       setAlert({
         type: "danger",
         message:
@@ -85,7 +85,7 @@ export default function ContactSection() {
           {/* Left Column - Contact Information */}
           <div className="space-y-6 rounded-md p-6 md:p-20 bg-[url('/contact-bg.jpg')] bg-cover bg-center bg-no-repeat">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-black">
-              Neem Contact Op
+              Contact met uw tandarts in Nieuwegein
             </h2>
 
             <p className="text-black md:text-lg">

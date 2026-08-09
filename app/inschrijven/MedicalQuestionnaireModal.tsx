@@ -124,16 +124,16 @@ const BloodPressureQuestion = ({
         value={answer}
         onValueChange={setAnswer}
       >
-        <Radio key="q4-Nee" value="Nee">
+        <Radio key="q4-Nee" className="min-h-11 py-2" value="Nee">
           Nee
         </Radio>
-        <Radio key="q4-Ja" value="Ja">
+        <Radio key="q4-Ja" className="min-h-11 py-2" value="Ja">
           Ja
         </Radio>
       </RadioGroup>
       {answer === "Ja" && (
-        <div className="mt-4 ml-6 space-y-2">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="mt-4 space-y-2 sm:ml-6">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label
                 className="block text-sm font-medium text-gray-700"
@@ -207,16 +207,24 @@ const DiabetesQuestion = ({
         value={hasDiabetes}
         onValueChange={setHasDiabetes}
       >
-        <Radio key={`${questionId}-Nee`} value="Nee">
+        <Radio
+          key={`${questionId}-Nee`}
+          className="min-h-11 py-2"
+          value="Nee"
+        >
           Nee
         </Radio>
-        <Radio key={`${questionId}-Ja`} value="Ja">
+        <Radio
+          key={`${questionId}-Ja`}
+          className="min-h-11 py-2"
+          value="Ja"
+        >
           Ja
         </Radio>
       </RadioGroup>
 
       {hasDiabetes === "Ja" && (
-        <div className="mt-4 ml-6 space-y-2">
+        <div className="mt-4 space-y-2 sm:ml-6">
           <label className="block text-sm font-medium text-gray-700">
             {insulinQuestionLabel}
           </label>
@@ -225,10 +233,18 @@ const DiabetesQuestion = ({
             value={usesInsulin}
             onValueChange={setUsesInsulin}
           >
-            <Radio key={`${questionId}-insulin-Nee`} value="Nee">
+            <Radio
+              key={`${questionId}-insulin-Nee`}
+              className="min-h-11 py-2"
+              value="Nee"
+            >
               Nee
             </Radio>
-            <Radio key={`${questionId}-insulin-Ja`} value="Ja">
+            <Radio
+              key={`${questionId}-insulin-Ja`}
+              className="min-h-11 py-2"
+              value="Ja"
+            >
               Ja
             </Radio>
           </RadioGroup>
@@ -276,16 +292,24 @@ const ContactDetailsQuestion = ({
         value={answer}
         onValueChange={setAnswer}
       >
-        <Radio key={`${questionId}-Nee`} value="Nee">
+        <Radio
+          key={`${questionId}-Nee`}
+          className="min-h-11 py-2"
+          value="Nee"
+        >
           Nee
         </Radio>
-        <Radio key={`${questionId}-Ja`} value="Ja">
+        <Radio
+          key={`${questionId}-Ja`}
+          className="min-h-11 py-2"
+          value="Ja"
+        >
           Ja
         </Radio>
       </RadioGroup>
 
       {answer === "Ja" && (
-        <div className="mt-4 ml-6 space-y-4">
+        <div className="mt-4 space-y-4 sm:ml-6">
           <p className="text-sm font-semibold text-gray-700">
             Contactgegevens {contactLabel}
           </p>
@@ -703,6 +727,18 @@ export default function MedicalQuestionnaireModal({
   }, [dateOfBirth, salutation]);
 
   useEffect(() => {
+    if (!isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
     if (dateOfBirth) {
       const age = calculateAge(dateOfBirth);
 
@@ -749,26 +785,59 @@ export default function MedicalQuestionnaireModal({
     onSubmit(answers);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 px-5 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-4">
-          Medische Vragenlijst voor {personName}{" "}
-          <Stethoscope className="inline-block mr-2" strokeWidth={2} />{" "}
-        </h2>
-        <div className="space-y-4">{formToShow}</div>
-        <div className="mt-8 flex justify-end space-x-4">
+    <div
+      aria-hidden={!isOpen}
+      className={`${isOpen ? "flex" : "hidden"} fixed inset-0 z-50 items-stretch justify-center bg-slate-950/55 sm:items-center sm:px-5`}
+    >
+      <div
+        aria-labelledby="medical-questionnaire-title"
+        aria-modal="true"
+        className="flex h-[100dvh] max-h-[100dvh] w-full max-w-2xl flex-col overflow-hidden bg-white shadow-2xl sm:h-auto sm:max-h-[90vh] sm:rounded-3xl sm:border sm:border-slate-200"
+        role="dialog"
+      >
+        <div className="shrink-0 border-b border-slate-200 bg-white px-4 py-4 sm:px-8 sm:py-5">
+          <h2
+            className="font-serif text-xl font-semibold leading-tight text-[#11182b] sm:text-3xl"
+            id="medical-questionnaire-title"
+          >
+            Medische Vragenlijst voor {personName}{" "}
+            <Stethoscope
+              aria-hidden="true"
+              className="ml-1 inline-block text-[#b18a36]"
+              strokeWidth={2}
+            />{" "}
+          </h2>
+        </div>
+
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-2 [&_[data-slot=input]]:text-base [&_[data-slot=input-wrapper]]:min-h-12 sm:px-8 sm:py-6">
+          <div>{formToShow}</div>
+        </div>
+
+        <div className="shrink-0 border-t border-slate-200 bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 sm:px-8 sm:py-4">
           {errorMessage && (
-            <p className="text-red-500 text-sm mr-auto">{errorMessage}</p>
+            <p className="mb-3 text-sm font-medium text-red-600" role="alert">
+              {errorMessage}
+            </p>
           )}
-          <Button className="bg-zinc-200" color="secondary" onPress={onClose}>
-            Annuleren
-          </Button>
-          <Button color="primary" onPress={handleSubmit}>
-            Opslaan
-          </Button>
+          <div className="flex justify-end gap-3">
+            <Button
+              className="min-h-12 flex-1 rounded-xl bg-zinc-200 sm:flex-none"
+              color="secondary"
+              type="button"
+              onPress={onClose}
+            >
+              Annuleren
+            </Button>
+            <Button
+              className="min-h-12 flex-1 rounded-xl bg-[#3a4e9d] text-white hover:bg-[#2d3d7a] sm:flex-none"
+              color="primary"
+              type="button"
+              onPress={handleSubmit}
+            >
+              Opslaan
+            </Button>
+          </div>
         </div>
       </div>
     </div>

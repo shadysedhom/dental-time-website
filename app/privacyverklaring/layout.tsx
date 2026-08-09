@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacyverklaring",
+  description:
+    "Lees hoe Dental Time in Nieuwegein omgaat met persoonsgegevens en gegevens uit het online inschrijfformulier.",
+  alternates: {
+    canonical: "/privacyverklaring",
+  },
+};
+
 export default function PrivacyVerklaringLayout({
   children,
 }: {

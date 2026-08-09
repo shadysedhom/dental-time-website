@@ -7,11 +7,11 @@ import ReviewSlider from "./ReviewSlider";
 export default function SocialProofSection() {
   const socialProofData = [
     {
-      value: "1K+",
-      label: "Tevreden patiënten",
+      value: "Nieuwegein",
+      label: "Op het Muntplein",
     },
     {
-      value: "20+",
+      value: "25+",
       label: "Jaar ervaring",
     },
     {

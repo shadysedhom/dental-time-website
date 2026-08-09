@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Algemene voorwaarden",
+  description:
+    "Lees de algemene voorwaarden van tandartspraktijk Dental Time in Nieuwegein.",
+  alternates: {
+    canonical: "/algemene-voorwaarden",
+  },
+};
+
 export default function AlgemeneVoorwaardenLayout({
   children,
 }: {

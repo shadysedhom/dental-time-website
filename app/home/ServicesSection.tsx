@@ -41,6 +41,7 @@ export default function ServicesSection() {
       ),
       title: "Algemene Tandheelkunde",
       description: "Persoonlijke zorg voor een gezonde en stralende glimlach.",
+      href: "/behandelingen/algemene-tandheelkunde",
     },
     {
       Icon: () => (
@@ -89,6 +90,7 @@ export default function ServicesSection() {
       ),
       title: "Cosmetische Tandheelkunde",
       description: "Verbeter het uiterlijk van uw tanden en glimlach.",
+      href: "/behandelingen/cosmetische-tandheelkunde",
     },
     {
       Icon: () => (
@@ -128,6 +130,7 @@ export default function ServicesSection() {
       ),
       title: "Behandeling Angstige Patiënten",
       description: "Comfortabele zorg voor patiënten met tandartsangst.",
+      href: "/behandelingen/angst-voor-de-tandarts",
     },
     {
       Icon: () => (
@@ -150,6 +153,7 @@ export default function ServicesSection() {
       ),
       title: "Restauratieve Tandheelkunde",
       description: "Herstel beschadigde tanden met moderne technieken.",
+      href: "/behandelingen/restauratieve-tandheelkunde",
     },
     {
       Icon: () => (
@@ -183,6 +187,7 @@ export default function ServicesSection() {
       title: "Kroon en Brugwerk",
       description:
         "Duurzame oplossingen voor ontbrekende of beschadigde tanden.",
+      href: "/behandelingen/kronen-en-bruggen",
     },
     {
       Icon: () => (
@@ -233,6 +238,7 @@ export default function ServicesSection() {
       title: "Wortelkanaalbehandeling",
       description:
         "Effectieve behandelingen om pijn te verlichten en tanden te redden.",
+      href: "/behandelingen/wortelkanaalbehandeling",
     },
     {
       Icon: () => (
@@ -268,6 +274,7 @@ export default function ServicesSection() {
       title: "Prothetische Behandelingen",
       description:
         "Comfortabele en natuurlijke vervangingen voor ontbrekende tanden.",
+      href: "/behandelingen/prothetische-behandelingen",
     },
   ];
 
@@ -311,6 +318,7 @@ export default function ServicesSection() {
                     key={index}
                     Icon={service.Icon}
                     description={service.description}
+                    href={service.href}
                     title={service.title}
                   />
                 </div>

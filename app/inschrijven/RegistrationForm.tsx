@@ -193,6 +193,14 @@ export default function RegistrationForm({
     scrollToFormHeading();
   };
 
+  const handleTermsAcceptanceChange = (isSelected: boolean) => {
+    setIsTermsAccepted(isSelected);
+
+    if (isSelected && alert?.message.includes("privacyverklaring")) {
+      setAlert(null);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
@@ -565,19 +573,19 @@ export default function RegistrationForm({
       className={clsx(
         "flex items-center bg-white text-left",
         isCampaign
-          ? "w-full rounded-3xl border border-slate-200 p-5 shadow-[0_24px_80px_rgba(30,50,90,0.12)] sm:p-8 lg:p-12"
+          ? "relative w-full overflow-clip rounded-3xl border border-white/90 bg-white/95 p-4 shadow-[0_24px_60px_rgba(17,24,43,0.11)] before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-[linear-gradient(90deg,#b18a36,#3a4e9d,#b18a36)] before:content-[''] sm:rounded-[2rem] sm:p-8 sm:shadow-[0_30px_90px_rgba(17,24,43,0.12)] lg:p-12"
           : "mb-40 p-8 md:w-5/6 rounded-md",
       )}
     >
       <form
         ref={formRef}
-        className="w-full space-y-6"
+        className="w-full space-y-5 sm:space-y-6"
         onSubmit={handleSubmit}
       >
         <div className={clsx("flex flex-col text-left", !isCampaign && "pb-10")}>
           <p
             className={clsx(
-              "mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-primary",
+              "mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#b18a36]",
               !isCampaign && "hidden",
             )}
           >
@@ -586,7 +594,7 @@ export default function RegistrationForm({
           <h2
             className={
               isCampaign
-                ? "scroll-mt-8 font-serif text-3xl font-semibold text-slate-950 sm:text-4xl"
+                 ? "scroll-mt-8 font-serif text-3xl font-semibold tracking-[-0.025em] text-[#11182b] sm:text-4xl"
                 : headerStyling
             }
             id="registration-form-heading"
@@ -595,7 +603,7 @@ export default function RegistrationForm({
           </h2>
           <p
             className={clsx(
-              "mt-3 leading-relaxed text-slate-600",
+              "mt-2 text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-relaxed",
               !isCampaign && "text-lg font-semibold text-black",
             )}
           >
@@ -605,14 +613,17 @@ export default function RegistrationForm({
         </div>
 
         {isCampaign && (
-          <nav aria-label="Voortgang inschrijving" className="py-2">
+          <nav
+            aria-label="Voortgang inschrijving"
+            className="rounded-2xl border border-[#e7e2d8] bg-[#faf8f3] p-3.5 sm:p-5"
+          >
             <div className="mb-3 flex items-center justify-between text-sm font-semibold text-slate-700 sm:hidden">
               <span>Stap {currentStep} van 4</span>
               <span>{steps[currentStep - 1]}</span>
             </div>
-            <div className="h-2 overflow-hidden rounded-full bg-slate-100 sm:hidden">
+            <div className="h-1.5 overflow-hidden rounded-full bg-[#e4dfd5] sm:hidden">
               <div
-                className="h-full rounded-full bg-primary transition-[width] duration-300 motion-reduce:transition-none"
+                className="h-full rounded-full bg-[linear-gradient(90deg,#b18a36,#3a4e9d)] transition-[width] duration-300 motion-reduce:transition-none"
                 style={{ width: `${currentStep * 25}%` }}
               />
             </div>
@@ -630,17 +641,23 @@ export default function RegistrationForm({
                   >
                     <div
                       className={clsx(
-                        "mb-3 h-1.5 rounded-full transition-colors motion-reduce:transition-none",
-                        stepNumber <= currentStep ? "bg-primary" : "bg-slate-100",
+                        "mb-3 h-px transition-colors motion-reduce:transition-none",
+                        isComplete
+                          ? "bg-[#b18a36]"
+                          : isCurrent
+                            ? "bg-[#3a4e9d]"
+                            : "bg-[#ddd8ce]",
                       )}
                     />
                     <div className="flex items-center gap-2">
                       <span
                         className={clsx(
                           "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold",
-                          isComplete || isCurrent
-                            ? "bg-primary text-white"
-                            : "bg-slate-100 text-slate-500",
+                          isComplete
+                            ? "bg-[#b18a36] text-white"
+                            : isCurrent
+                              ? "bg-[#3a4e9d] text-white shadow-[0_4px_12px_rgba(58,78,157,0.25)]"
+                              : "border border-[#ddd8ce] bg-white text-slate-500",
                         )}
                       >
                         {isComplete ? (
@@ -675,7 +692,7 @@ export default function RegistrationForm({
         >
           {isCampaign && (
             <div>
-              <h3 className="text-xl font-semibold text-slate-900">
+                <h3 className="font-serif text-2xl font-semibold text-[#11182b]">
                 Uw contactgegevens
               </h3>
               <p className="mt-1 text-sm text-slate-500">
@@ -760,7 +777,7 @@ export default function RegistrationForm({
         >
           {isCampaign && (
             <div>
-              <h3 className="text-xl font-semibold text-slate-900">
+                <h3 className="font-serif text-2xl font-semibold text-[#11182b]">
                 Praktijkgegevens
               </h3>
               <p className="mt-1 text-sm text-slate-500">
@@ -859,7 +876,7 @@ export default function RegistrationForm({
         >
           {isCampaign && (
             <div>
-              <h3 className="text-xl font-semibold text-slate-900">
+                <h3 className="font-serif text-2xl font-semibold text-[#11182b]">
                 Medische vragenlijst
               </h3>
               <p className="mt-1 text-sm text-slate-500">
@@ -871,7 +888,7 @@ export default function RegistrationForm({
             className={clsx(
               "border-gray-200 pt-6",
               !isCampaign && "border-t",
-              isCampaign && "rounded-2xl border bg-slate-50 p-5",
+              isCampaign && "rounded-2xl border bg-slate-50 p-4 sm:p-5",
             )}
           >
             <h3 className="mb-2 font-semibold text-gray-700">
@@ -883,13 +900,19 @@ export default function RegistrationForm({
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <Button
-                color={primaryUserMedicalData ? "success" : "default"}
+                className={clsx(
+                  "min-h-11 rounded-xl font-semibold transition-colors",
+                  primaryUserMedicalData &&
+                    "border border-slate-300 bg-white text-[#293b7c] shadow-sm hover:border-[#3a4e9d] hover:bg-[#f4f6ff]",
+                )}
+                color="default"
                 disabled={!primaryUserDoB || isSubmitting}
                 type="button"
+                variant={primaryUserMedicalData ? "bordered" : "solid"}
                 onPress={() => setIsMedicalModalOpen(true)}
               >
                 {primaryUserMedicalData
-                  ? "Vragenlijst bekijken"
+                  ? "Bekijken of wijzigen"
                   : "Open vragenlijst"}
               </Button>
               {primaryUserMedicalData && (
@@ -935,7 +958,7 @@ export default function RegistrationForm({
         >
           {isCampaign && (
             <div>
-              <h3 className="text-xl font-semibold text-slate-900">
+                <h3 className="font-serif text-2xl font-semibold text-[#11182b]">
                 Gezin en bevestiging
               </h3>
               <p className="mt-1 text-sm text-slate-500">
@@ -947,9 +970,12 @@ export default function RegistrationForm({
             <Checkbox
               classNames={{
                 base: "items-start",
+                icon: "text-white",
                 label: "text-sm text-gray-700",
-                wrapper: "mt-0.5 text-primary-700",
+                wrapper:
+                  "mt-0.5 rounded-md text-white before:rounded-md before:border-slate-300 after:rounded-md after:bg-[#3a4e9d] after:text-white group-data-[selected=true]:before:border-[#3a4e9d]",
               }}
+              disableAnimation
               disabled={isSubmitting}
               isSelected={addFamilyMembers}
               type="checkbox"
@@ -961,10 +987,14 @@ export default function RegistrationForm({
 
           {addFamilyMembers && (
             <div className="mt-4">
-              <div className="mb-4 flex flex-wrap items-center gap-4">
+              <div className="mb-4 grid grid-cols-[5rem_minmax(0,1fr)] items-center gap-3 sm:flex sm:flex-wrap sm:gap-4">
                 <Input
                   aria-label="Aantal gezinsleden om toe te voegen"
-                  className="w-24"
+                  className="w-full sm:w-24"
+                  classNames={{
+                    input: "text-base",
+                    inputWrapper: "min-h-12",
+                  }}
                   disabled={isSubmitting}
                   min="1"
                   type="number"
@@ -976,6 +1006,7 @@ export default function RegistrationForm({
                   }
                 />
                 <Button
+                  className="min-h-12 whitespace-normal px-3 sm:px-4"
                   disabled={isSubmitting}
                   type="button"
                   onPress={addFamilyMember}
@@ -1002,12 +1033,15 @@ export default function RegistrationForm({
             <Checkbox
               classNames={{
                 base: "items-start",
+                icon: "text-white",
                 label: "text-sm leading-relaxed text-gray-700",
-                wrapper: "mt-0.5 text-primary-700",
+                wrapper:
+                  "mt-0.5 rounded-md text-white before:rounded-md before:border-slate-300 after:rounded-md after:bg-[#3a4e9d] after:text-white group-data-[selected=true]:before:border-[#3a4e9d]",
               }}
+              disableAnimation
               disabled={isSubmitting}
               isSelected={isTermsAccepted}
-              onValueChange={setIsTermsAccepted}
+              onValueChange={handleTermsAcceptanceChange}
             >
               Ik bevestig dat ik akkoord ga met de&nbsp;
               <NextLink
@@ -1038,13 +1072,13 @@ export default function RegistrationForm({
 
         <div
           className={clsx(
-            "flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:items-center",
+            "flex items-center gap-3 pt-2 sm:flex-row",
             isCampaign ? "sm:justify-between" : "sm:justify-start",
           )}
         >
           {isCampaign && currentStep > 1 && (
             <Button
-              className="rounded-xl"
+              className="min-h-12 shrink-0 rounded-xl px-3 sm:px-4"
               disabled={isSubmitting}
               startContent={<ArrowLeft aria-hidden="true" className="h-4 w-4" />}
               type="button"
@@ -1056,7 +1090,8 @@ export default function RegistrationForm({
           )}
           {isCampaign && currentStep < 4 ? (
             <Button
-              className="w-full rounded-xl text-white sm:ml-auto sm:w-auto"
+              key="campaign-next-step"
+              className="min-h-12 flex-1 rounded-xl bg-[#3a4e9d] px-5 text-white shadow-[0_10px_24px_rgba(58,78,157,0.22)] hover:bg-[#2d3d7a] sm:ml-auto sm:flex-none sm:px-6"
               color="primary"
               disabled={isSubmitting}
               endContent={<ArrowRight aria-hidden="true" className="h-4 w-4" />}
@@ -1067,7 +1102,8 @@ export default function RegistrationForm({
             </Button>
           ) : (
             <Button
-              className="w-full rounded-xl text-white sm:w-auto"
+              key={isCampaign ? "campaign-submit" : "standard-submit"}
+              className="min-h-12 flex-1 rounded-xl bg-[#3a4e9d] px-5 text-white shadow-[0_10px_24px_rgba(58,78,157,0.22)] hover:bg-[#2d3d7a] sm:flex-none sm:px-6"
               color="primary"
               disabled={isSubmitting}
               type="submit"

@@ -30,9 +30,9 @@ export default function CampaignStickyCTA() {
   if (!hasScrolled || isFormVisible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 p-3 shadow-[0_-10px_30px_rgba(15,23,42,0.12)] backdrop-blur md:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-10px_30px_rgba(15,23,42,0.12)] backdrop-blur md:hidden">
       <a
-        className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 font-semibold text-white"
+        className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 font-semibold text-white"
         href="#inschrijven"
       >
         Start mijn inschrijving

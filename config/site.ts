@@ -23,9 +23,27 @@ export type SiteConfig = {
   contactMenuItems: ContactMenuItem[];
 };
 
+export const businessConfig = {
+  url: "https://www.dental-time.nl",
+  name: "Dental Time",
+  legalName: "Dental Time B.V.",
+  description:
+    "Uw tandarts in Nieuwegein voor persoonlijke, moderne mondzorg. Nieuwe patiënten zijn welkom bij onze praktijk op het Muntplein.",
+  phone: "030 604 9005",
+  phoneInternational: "+31306049005",
+  email: "info@dental-time.nl",
+  address: {
+    streetAddress: "Waardijnburg 3",
+    postalCode: "3437 AR",
+    addressLocality: "Nieuwegein",
+    addressCountry: "NL",
+  },
+  mapsUrl: "https://maps.app.goo.gl/x1usR2bYpxEx1ebV8",
+} as const;
+
 export const siteConfig = {
   name: "Dental Time",
-  description: "Tandarts in Nieuwegein",
+  description: businessConfig.description,
   navItems: [
     // -------------- For Desktop --------------
     {
@@ -33,8 +51,12 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "About Us",
-      href: "/about",
+      label: "Over ons",
+      href: "/over-ons",
+    },
+    {
+      label: "Behandelingen",
+      href: "/behandelingen",
     },
     {
       label: "Contact",
@@ -52,8 +74,12 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "About Us",
-      href: "/about",
+      label: "Over ons",
+      href: "/over-ons",
+    },
+    {
+      label: "Behandelingen",
+      href: "/behandelingen",
     },
     {
       label: "Contact",
@@ -65,7 +91,7 @@ export const siteConfig = {
     },
     {
       label: "Inschrijven",
-      href: "/inschrijven",
+      href: "/nieuwe-patienten-inschrijven",
     },
   ],
   openingTimes: [

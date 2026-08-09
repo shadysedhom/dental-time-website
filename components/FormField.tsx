@@ -44,6 +44,10 @@ export default function FormField({
       <Input
         autoComplete={autoComplete}
         className="w-full"
+        classNames={{
+          input: "text-base",
+          inputWrapper: "min-h-12",
+        }}
         disabled={disabled}
         id={name}
         inputMode={inputMode}
@@ -53,6 +57,7 @@ export default function FormField({
         placeholder={placeholder}
         radius="sm"
         required={required}
+        size="lg"
         type={type}
         onChange={handleChange}
       />

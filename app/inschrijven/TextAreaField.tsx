@@ -22,11 +22,16 @@ export default function TextAreaField({
       </label>
       <Textarea
         className="w-full"
+        classNames={{
+          input: "text-base",
+          inputWrapper: "min-h-28",
+        }}
         disabled={disabled}
         id={name}
         name={name}
         placeholder={placeholder}
         radius="sm"
+        size="lg"
       />
     </div>
   );

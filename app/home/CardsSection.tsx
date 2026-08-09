@@ -76,7 +76,7 @@ export default function CardsSection() {
         <CardContent
           description="Wij verheugen ons om onze deuren te openen voor nieuwe patiënten. U kunt zich telefonisch bij ons inschrijven of door middel van het online inschrijfformulier."
           icon={<UserPlus className="text-white" size={40} />}
-          linkHref="/inschrijven"
+          linkHref="/nieuwe-patienten-inschrijven"
           linkText="Online Inschrijven"
           linkVariant="primary"
           title="Inschrijven"

@@ -53,6 +53,7 @@ export default function MedicalQuestion({
         {options.map((option) => (
           <Radio
             key={`${name}-${option.split("-->")[0].trim()}`}
+            className="min-h-11 py-2"
             value={option.split("-->")[0].trim()}
           >
             {option.split("-->")[0].trim()}
@@ -60,8 +61,12 @@ export default function MedicalQuestion({
         ))}
       </RadioGroup>
       {showDetailsInput && (
-        <div className="mt-2 ml-6">
+        <div className="mt-2 sm:ml-6">
           <Input
+            classNames={{
+              input: "text-base",
+              inputWrapper: "min-h-12",
+            }}
             isRequired
             name={`${name}-details`}
             placeholder={options
@@ -69,6 +74,7 @@ export default function MedicalQuestion({
               ?.split("-->")[1]
               .trim()}
             value={details}
+            size="lg"
             onChange={handleDetailsChange}
           />
         </div>

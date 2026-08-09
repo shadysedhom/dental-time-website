@@ -1,5 +1,6 @@
 import { Button } from "@heroui/button";
 import { useState, Fragment } from "react";
+import { Trash2 } from "lucide-react";
 
 import RadioGroup from "./RadioGroup";
 import MedicalQuestionnaireModal from "./MedicalQuestionnaireModal";
@@ -61,19 +62,26 @@ export default function FamilyMemberForm({
     .split("T")[0];
 
   return (
-    <div className="border rounded-lg px-6 py-12 mt-4 relative">
-      <h3 className="text-lg font-semibold">Gezinslid {index + 1}</h3>
-      <p className="text-sm py-4 text-gray-500">
+    <div className="relative mt-4 rounded-3xl border border-[#e4ded2] bg-[#faf8f3] px-4 py-6 [&_[data-slot=input-wrapper]]:border [&_[data-slot=input-wrapper]]:border-[#ded8cc] [&_[data-slot=input-wrapper]]:bg-white [&_[data-slot=input-wrapper]]:shadow-sm [&_[data-slot=input-wrapper]]:transition-colors [&_[data-slot=input-wrapper]:focus-within]:border-[#3a4e9d] sm:px-7 sm:py-10">
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="font-serif text-2xl font-semibold text-[#11182b]">
+          Gezinslid {index + 1}
+        </h3>
+        <Button
+          aria-label="Gezinslid verwijderen"
+          className="min-h-11 shrink-0 rounded-xl border border-rose-200 bg-white px-3 text-rose-700 shadow-sm transition hover:border-rose-300 hover:bg-rose-50"
+          size="sm"
+          startContent={<Trash2 aria-hidden="true" className="h-4 w-4" />}
+          type="button"
+          variant="bordered"
+          onPress={onRemove}
+        >
+          <span className="hidden min-[350px]:inline">Verwijderen</span>
+        </Button>
+      </div>
+      <p className="pb-4 pt-2 text-sm text-gray-500">
         Vul de gegevens van het gezinslid in.
       </p>
-
-      <Button
-        className="absolute top-2 right-2"
-        type="button"
-        onPress={onRemove}
-      >
-        Verwijderen
-      </Button>
 
       <RadioGroup
         required
@@ -87,7 +95,7 @@ export default function FamilyMemberForm({
         onValueChange={handleSalutationChange}
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 mt-4">
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <FormField
           required
           label="Voornaam"
@@ -171,11 +179,12 @@ export default function FamilyMemberForm({
         placeholder="Naam huidige tandarts"
       />
 
-      <div className="border-t border-gray-200 pt-6">
-        <h3 className="text-md font-semibold text-gray-700 mb-2">
+      <div className="mt-6 border-t border-[#ddd7cb] pt-6">
+        <h3 className="mb-2 font-semibold text-gray-700">
           Medische Vragenlijst <span className="text-red-500">*</span>
         </h3>
         <Button
+          className="min-h-11"
           disabled={!dateOfBirth}
           type="button"
           onPress={() => setIsMedicalModalOpen(true)}
@@ -183,7 +192,9 @@ export default function FamilyMemberForm({
           Open Vragenlijst
         </Button>
         {medicalData && (
-          <span className="ml-4 text-green-600 font-semibold">✓ Ingevuld</span>
+          <span className="ml-3 inline-flex font-semibold text-green-600">
+            ✓ Ingevuld
+          </span>
         )}
         {!dateOfBirth && (
           <p className="text-sm text-gray-500 mt-2">
