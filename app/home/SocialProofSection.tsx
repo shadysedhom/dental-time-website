@@ -43,7 +43,7 @@ export default function SocialProofSection() {
           </h3>
 
           <div className="flex flex-row justify-center sm:justify-start">
-            <h2 className="text-xl font-bold text-orange-400 mr-2">4.2</h2>
+            <h2 className="text-xl font-bold text-orange-400 mr-2">4.4</h2>
 
             <div className="flex mt-1">
               {[...Array(5)].map((_, i) => (
