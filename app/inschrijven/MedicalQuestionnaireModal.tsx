@@ -4,9 +4,15 @@ import { useEffect, useState, useCallback } from "react";
 import { Stethoscope } from "lucide-react";
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
-import { RadioGroup, Radio } from "@heroui/radio";
+import { RadioGroup, Radio } from "@heroui/react";
 
 import MedicalQuestion from "./MedicalQuestion";
+import {
+  ADULT_REQUIRED_QUESTION_IDS,
+  CHILD_REQUIRED_QUESTION_IDS,
+  validateMedicalAnswers,
+} from "./medicalValidation";
+import { calculateAge } from "./registrationUtils";
 
 export const ADULT_QUESTIONS_MAP: Record<string, string> = {
   q0: "Is er de agelopen maanden iets aan uw gezondheid veranderd?",
@@ -80,83 +86,6 @@ export const KID_DETAIL_QUESTIONS_MAP: Record<string, string> = {
   q14: "Welke medicijnen?",
 };
 
-const SIXTEEN_AND_OLDER_QUESTION_IDS = [
-  "q0",
-  "q1",
-  "q2",
-  "q3",
-  "q4",
-  "q5",
-  "q6",
-  "q7",
-  "q8",
-  "q9",
-  "q10",
-  "q11",
-  "q12",
-  "q13",
-  "q14",
-  "q15",
-  "q16",
-  "q17",
-  "q18",
-  "q19",
-  "q20",
-  "q21",
-  "q22",
-  "q23",
-  "q24",
-  "q25",
-  "q26",
-  "q27",
-  "q28",
-  "q29",
-];
-
-const YOUNGER_THAN_SIXTEEN_QUESTION_IDS = [
-  "q0",
-  "q1",
-  "q2",
-  "q3",
-  "q4",
-  "q5",
-  "q6",
-  "q7",
-  "q8",
-  "q9",
-  "q10",
-  "q11",
-  "q12",
-  "q13",
-  "q14",
-];
-
-const validateAnswers = (
-  answers: Record<string, { answer: string; details?: string }>,
-  requiredQuestionIds: string[],
-  isAdultForm: boolean,
-  salutation?: string,
-) => {
-  for (const qId of requiredQuestionIds) {
-    // Handle gender-specific questions for adults
-    if (
-      isAdultForm &&
-      (qId === "q23" || qId === "q24") &&
-      salutation !== "Mevr."
-    ) {
-      continue; // Skip if not a female adult
-    }
-
-    const answerEntry = answers[qId];
-
-    if (!answerEntry || !answerEntry.answer) {
-      return `Gelieve alle vragen in te vullen.`;
-    }
-  }
-
-  return null; // No errors
-};
-
 type FormProps = {
   onQuestionChange: (
     questionId: string,
@@ -213,6 +142,7 @@ const BloodPressureQuestion = ({
                 Onderdruk
               </label>
               <Input
+                isRequired
                 id="onderdruk"
                 name="onderdruk"
                 placeholder="Onderdruk"
@@ -228,6 +158,7 @@ const BloodPressureQuestion = ({
                 Bovendruk
               </label>
               <Input
+                isRequired
                 id="bovendruk"
                 name="bovendruk"
                 placeholder="Bovendruk"
@@ -289,7 +220,11 @@ const DiabetesQuestion = ({
           <label className="block text-sm font-medium text-gray-700">
             {insulinQuestionLabel}
           </label>
-          <RadioGroup value={usesInsulin} onValueChange={setUsesInsulin}>
+          <RadioGroup
+            isRequired
+            value={usesInsulin}
+            onValueChange={setUsesInsulin}
+          >
             <Radio key={`${questionId}-insulin-Nee`} value="Nee">
               Nee
             </Radio>
@@ -356,10 +291,15 @@ const ContactDetailsQuestion = ({
           </p>
           <div className="grid grid-cols-1 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                className="block text-sm font-medium text-gray-700 mb-1"
+                htmlFor={`${questionId}-contact-name`}
+              >
                 Naam
               </label>
               <Input
+                isRequired
+                id={`${questionId}-contact-name`}
                 placeholder="Naam"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -368,21 +308,33 @@ const ContactDetailsQuestion = ({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                className="block text-sm font-medium text-gray-700 mb-1"
+                htmlFor={`${questionId}-contact-phone`}
+              >
                 Telefoonnummer
               </label>
               <Input
+                isRequired
+                id={`${questionId}-contact-phone`}
                 placeholder="Telefoonnummer"
+                type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                className="block text-sm font-medium text-gray-700 mb-1"
+                htmlFor={`${questionId}-contact-email`}
+              >
                 E-mail
               </label>
               <Input
+                isRequired
+                id={`${questionId}-contact-email`}
                 placeholder="E-mail"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -746,47 +698,41 @@ export default function MedicalQuestionnaireModal({
   );
 
   useEffect(() => {
-    if (dateOfBirth) {
-      const today = new Date();
-      const birthDate = new Date(dateOfBirth);
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const m = today.getMonth() - birthDate.getMonth();
+    setAnswers({});
+    setErrorMessage(null);
+  }, [dateOfBirth, salutation]);
 
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
+  useEffect(() => {
+    if (dateOfBirth) {
+      const age = calculateAge(dateOfBirth);
 
       if (age >= 16) {
         setFormToShow(
           <SixteenAndOlderForm
+            key={`adult-${dateOfBirth}-${salutation}`}
             salutation={salutation}
             onQuestionChange={handleQuestionChange}
           />,
         );
       } else {
         setFormToShow(
-          <YoungerThanSixteenForm onQuestionChange={handleQuestionChange} />,
+          <YoungerThanSixteenForm
+            key={`child-${dateOfBirth}`}
+            onQuestionChange={handleQuestionChange}
+          />,
         );
       }
     }
   }, [dateOfBirth, salutation, handleQuestionChange]);
 
   const handleSubmit = () => {
-    const today = new Date();
-    const birthDate = new Date(dateOfBirth);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-
+    const age = calculateAge(dateOfBirth);
     const isAdultForm = age >= 16;
     const requiredIds = isAdultForm
-      ? SIXTEEN_AND_OLDER_QUESTION_IDS
-      : YOUNGER_THAN_SIXTEEN_QUESTION_IDS;
+      ? ADULT_REQUIRED_QUESTION_IDS
+      : CHILD_REQUIRED_QUESTION_IDS;
 
-    const validationError = validateAnswers(
+    const validationError = validateMedicalAnswers(
       answers,
       requiredIds,
       isAdultForm,

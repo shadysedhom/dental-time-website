@@ -9,6 +9,7 @@ import { fontSans, fontSerif, fontMontserrat } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.dental-time.nl"),
   title: {
     default: siteConfig.name,
     template: `%s - ${siteConfig.name}`,
@@ -32,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning className="light" lang="en">
+    <html suppressHydrationWarning className="light" lang="nl">
       <head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link href="/favicon.ico" rel="icon" />

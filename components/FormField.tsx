@@ -11,6 +11,9 @@ export default function FormField({
   disabled = false,
   autoComplete,
   onValueChange,
+  inputMode,
+  max,
+  pattern,
 }: {
   label: string;
   name: string;
@@ -20,6 +23,9 @@ export default function FormField({
   disabled?: boolean;
   autoComplete?: string;
   onValueChange?: (value: string) => void;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  max?: string;
+  pattern?: string;
 }) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onValueChange) {
@@ -40,7 +46,10 @@ export default function FormField({
         className="w-full"
         disabled={disabled}
         id={name}
+        inputMode={inputMode}
+        max={max}
         name={name}
+        pattern={pattern}
         placeholder={placeholder}
         radius="sm"
         required={required}

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { RadioGroup, Radio } from "@heroui/radio";
+import { RadioGroup, Radio } from "@heroui/react";
 import { Input } from "@heroui/input";
 import { useState } from "react";
 
@@ -62,6 +62,7 @@ export default function MedicalQuestion({
       {showDetailsInput && (
         <div className="mt-2 ml-6">
           <Input
+            isRequired
             name={`${name}-details`}
             placeholder={options
               .find((opt) => opt.startsWith("Ja -->"))

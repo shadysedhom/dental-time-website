@@ -11,12 +11,17 @@ import {
 } from "@heroui/navbar";
 import { Button } from "@heroui/button";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import { UserPlus } from "lucide-react";
 
 import { siteConfig } from "@/config/site";
 import CustomLink from "@/components/CustomLink";
 
 export const Navbar = () => {
+  const pathname = usePathname();
+
+  if (pathname === "/nieuwe-patienten-inschrijven") return null;
+
   return (
     <HeroUINavbar
       className=" fixed top-0 z-20 py-2 px-6 bg-zinc-100 bg-opacity-60 mx-auto md:rounded-md md:mt-3 md:w-5/6 "

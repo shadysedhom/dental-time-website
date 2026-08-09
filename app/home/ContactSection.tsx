@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@heroui/button";
 import { Textarea } from "@heroui/input";
-import { Alert } from "@heroui/alert";
+import { Alert } from "@heroui/react";
 import { Building2, Mail, Phone, Send } from "lucide-react";
 import emailjs from "emailjs-com";
 

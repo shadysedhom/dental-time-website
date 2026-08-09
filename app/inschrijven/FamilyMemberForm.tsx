@@ -22,6 +22,7 @@ export default function FamilyMemberForm({
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [firstName, setFirstName] = useState("");
   const [salutation, setSalutation] = useState("");
+  const [medicalResetNotice, setMedicalResetNotice] = useState(false);
   const [medicalData, setMedicalData] = useState<Record<
     string,
     { answer: string; details?: string }
@@ -31,8 +32,33 @@ export default function FamilyMemberForm({
     data: Record<string, { answer: string; details?: string }>,
   ) => {
     setMedicalData(data);
+    setMedicalResetNotice(false);
     setIsMedicalModalOpen(false);
   };
+
+  const resetMedicalDataIfNeeded = () => {
+    if (medicalData) {
+      setMedicalData(null);
+      setMedicalResetNotice(true);
+    }
+  };
+
+  const handleDateOfBirthChange = (value: string) => {
+    if (value !== dateOfBirth) resetMedicalDataIfNeeded();
+    setDateOfBirth(value);
+  };
+
+  const handleSalutationChange = (value: string) => {
+    if (value !== salutation) resetMedicalDataIfNeeded();
+    setSalutation(value);
+  };
+
+  const today = new Date();
+  const maxDateOfBirth = new Date(
+    today.getTime() - today.getTimezoneOffset() * 60_000,
+  )
+    .toISOString()
+    .split("T")[0];
 
   return (
     <div className="border rounded-lg px-6 py-12 mt-4 relative">
@@ -41,7 +67,11 @@ export default function FamilyMemberForm({
         Vul de gegevens van het gezinslid in.
       </p>
 
-      <Button className="absolute top-2 right-2" onPress={onRemove}>
+      <Button
+        className="absolute top-2 right-2"
+        type="button"
+        onPress={onRemove}
+      >
         Verwijderen
       </Button>
 
@@ -54,7 +84,7 @@ export default function FamilyMemberForm({
           { value: "Mevr.", label: "Mevr." },
         ]}
         value={salutation}
-        onValueChange={setSalutation}
+        onValueChange={handleSalutationChange}
       />
 
       <div className="grid gap-4 sm:grid-cols-2 mt-4">
@@ -79,7 +109,8 @@ export default function FamilyMemberForm({
         name={`${namePrefix}[dateOfBirth]`}
         placeholder="Geboortedatum"
         type="date"
-        onValueChange={setDateOfBirth}
+        max={maxDateOfBirth}
+        onValueChange={handleDateOfBirthChange}
       />
 
       <FormField
@@ -131,7 +162,8 @@ export default function FamilyMemberForm({
         label="BSN-nummer"
         name={`${namePrefix}[bsn]`}
         placeholder="BSN-nummer"
-        type="number"
+        inputMode="numeric"
+        pattern="[0-9]*"
       />
       <FormField
         label="Naam huidige tandarts"
@@ -145,6 +177,7 @@ export default function FamilyMemberForm({
         </h3>
         <Button
           disabled={!dateOfBirth}
+          type="button"
           onPress={() => setIsMedicalModalOpen(true)}
         >
           Open Vragenlijst
@@ -155,6 +188,12 @@ export default function FamilyMemberForm({
         {!dateOfBirth && (
           <p className="text-sm text-gray-500 mt-2">
             Gelieve eerst de geboortedatum van het gezinslid in te vullen.
+          </p>
+        )}
+        {medicalResetNotice && (
+          <p className="text-sm text-amber-700 mt-2" role="status">
+            De eerdere medische antwoorden zijn gewist. Vul de vragenlijst
+            opnieuw in.
           </p>
         )}
       </div>

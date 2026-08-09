@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody } from "@heroui/card";
+import { Card, CardBody } from "@heroui/react";
 
 interface ServiceCardProps {
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>; // Adjusted type
