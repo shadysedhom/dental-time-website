@@ -18,6 +18,7 @@ import {
 import CampaignStickyCTA from "./CampaignStickyCTA";
 
 import RegistrationForm from "@/app/inschrijven/RegistrationForm";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -468,6 +469,7 @@ export default function NewPatientsRegistrationPage() {
             <Link className="transition hover:text-primary" href="/algemene-voorwaarden">
               Algemene voorwaarden
             </Link>
+            <CookieSettingsButton className="transition hover:text-primary" />
             <span>Waardijnburg 3, Nieuwegein</span>
           </div>
         </div>

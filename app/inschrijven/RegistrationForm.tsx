@@ -32,6 +32,7 @@ import {
   calculateAge,
   formatDateForSubmission,
 } from "./registrationUtils";
+import { trackMetaLead } from "@/lib/metaPixel";
 
 type RegistrationFormProps = {
   headerStyling?: string;
@@ -62,9 +63,14 @@ export default function RegistrationForm({
   const [addFamilyMembers, setAddFamilyMembers] = useState(false);
   const [familyMemberIds, setFamilyMemberIds] = useState<number[]>([]);
   const [nextId, setNextId] = useState(0);
-  const [numFamilyMembersToAdd, setNumFamilyMembersToAdd] = useState(1);
+  const [numFamilyMembersToAdd, setNumFamilyMembersToAdd] = useState("1");
   const [currentStep, setCurrentStep] = useState(1);
   const [submissionSucceeded, setSubmissionSucceeded] = useState(false);
+
+  const familyMemberCount = Math.max(
+    1,
+    Number.parseInt(numFamilyMembersToAdd, 10) || 1,
+  );
 
   // State for primary user's medical questionnaire
   const [isMedicalModalOpen, setIsMedicalModalOpen] = useState(false);
@@ -89,12 +95,13 @@ export default function RegistrationForm({
     const newIds = [];
     let currentNextId = nextId;
 
-    for (let i = 0; i < numFamilyMembersToAdd; i++) {
+    for (let i = 0; i < familyMemberCount; i++) {
       newIds.push(currentNextId);
       currentNextId++;
     }
     setFamilyMemberIds([...familyMemberIds, ...newIds]);
     setNextId(currentNextId);
+    setNumFamilyMembersToAdd(String(familyMemberCount));
   };
 
   // Helper function to remove a family member from the array
@@ -495,9 +502,10 @@ export default function RegistrationForm({
         setIsTermsAccepted(false);
         setCurrentStep(1);
         try {
+          trackMetaLead();
           onSuccessfulSubmission?.();
         } catch {
-          // A future analytics hook must never affect a successful registration.
+          // Analytics must never affect a successful registration.
         }
       } else {
         setAlert({
@@ -998,12 +1006,11 @@ export default function RegistrationForm({
                   disabled={isSubmitting}
                   min="1"
                   type="number"
-                  value={String(numFamilyMembersToAdd)}
-                  onChange={(e) =>
-                    setNumFamilyMembersToAdd(
-                      Math.max(1, parseInt(e.target.value, 10) || 1),
-                    )
+                  value={numFamilyMembersToAdd}
+                  onBlur={() =>
+                    setNumFamilyMembersToAdd(String(familyMemberCount))
                   }
+                  onValueChange={setNumFamilyMembersToAdd}
                 />
                 <Button
                   className="min-h-12 whitespace-normal px-3 sm:px-4"
@@ -1011,7 +1018,7 @@ export default function RegistrationForm({
                   type="button"
                   onPress={addFamilyMember}
                 >
-                  {numFamilyMembersToAdd > 1
+                  {familyMemberCount > 1
                     ? "Gezinsleden toevoegen"
                     : "Gezinslid toevoegen"}
                 </Button>

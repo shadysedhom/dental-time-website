@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 import CustomLink from "./CustomLink";
+import CookieSettingsButton from "./CookieSettingsButton";
 
 import { siteConfig } from "@/config/site";
 
@@ -94,6 +95,10 @@ export default function Footer() {
                 <CustomLink href="/privacyverklaring">
                   Privacyverklaring
                 </CustomLink>
+              </li>
+
+              <li>
+                <CookieSettingsButton className="text-left text-primary underline-offset-4 hover:underline" />
               </li>
             </ul>
           </div>

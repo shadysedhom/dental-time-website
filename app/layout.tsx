@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
+import { Suspense } from "react";
 
 import { Providers } from "./providers";
 
@@ -8,6 +9,7 @@ import { businessConfig, siteConfig } from "@/config/site";
 import { fontSans, fontSerif, fontMontserrat } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import StructuredData from "@/components/StructuredData";
+import MetaPixelConsentManager from "@/components/MetaPixelConsent";
 
 export const metadata: Metadata = {
   metadataBase: new URL(businessConfig.url),
@@ -143,6 +145,9 @@ export default function RootLayout({
               {children}
             </main>
           </div>
+          <Suspense fallback={null}>
+            <MetaPixelConsentManager />
+          </Suspense>
         </Providers>
       </body>
     </html>

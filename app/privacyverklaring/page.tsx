@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin } from "lucide-react";
 
 import FooterSection from "@/components/footer";
 import CustomLink from "@/components/CustomLink";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 import { title } from "@/components/primitives";
 import { siteConfig } from "@/config/site";
 
@@ -195,30 +196,40 @@ export default function PrivacyverklaringPage() {
           Cookies, of vergelijkbare technieken, die wij gebruiken
         </p>
 
-        <p>
-          {companyName} gebruikt functionele en analytische cookies. Een cookie
-          is een klein tekstbestand dat bij het eerste bezoek aan deze website
-          wordt opgeslagen in de browser van uw computer, tablet of smartphone.{" "}
-          {companyName} gebruikt cookies met een technische functionaliteit.
-          Deze zorgen ervoor dat de website naar behoren werkt en dat
-          bijvoorbeeld uw voorkeursinstellingen onthouden worden. Deze cookies
-          worden ook gebruikt om de website goed te laten werken en deze te
-          kunnen optimaliseren. Daarnaast plaatsen we cookies die uw surfgedrag
-          bijhouden zodat we op maat gemaakte content en advertenties kunnen
-          aanbieden.
-          <br /> <br />
-          Bij uw eerste bezoek aan onze website hebben wij u al geïnformeerd
-          over deze cookies en toestemming gevraagd voor het plaatsen ervan. U
-          kunt zich afmelden voor cookies door uw internetbrowser zo in te
-          stellen dat deze geen cookies meer opslaat. Daarnaast kunt u ook alle
-          informatie die eerder is opgeslagen via de instellingen van uw browser
-          verwijderen.
-          <br /> <br />
-          Zie voor een toelichting: &nbsp;
-          <CustomLink href="https://veiliginternetten.nl/themes/situatie/cookies-wat-zijn-het-en-wat-doe-ik-ermee/">
-            veiliginternetten.nl/themes/situatie/cookies-wat-zijn-het-en-wat-doe-ik-ermee/
-          </CustomLink>
-        </p>
+        <div className="space-y-4">
+          <p>
+            {companyName} gebruikt noodzakelijke opslag om de website goed te
+            laten werken en om uw cookievoorkeur te onthouden. Hiervoor is geen
+            marketingtoestemming nodig.
+          </p>
+          <p>
+            Alleen wanneer u marketingcookies accepteert, laden wij de Meta
+            Pixel van Meta Platforms Ireland Limited. Daarmee meten we
+            paginaweergaven en registreren we na een succesvol verzonden
+            inschrijfformulier een algemene Lead-gebeurtenis. Meta kan hierbij
+            onder andere het webadres, verwijzende pagina, browser- en
+            apparaatgegevens, het IP-adres en cookie-identificatoren ontvangen.
+            Dit gebruiken wij om de prestaties van onze advertenties te meten en
+            te verbeteren.
+          </p>
+          <p>
+            Wij sturen geen namen, contactgegevens, BSN-nummers, medische
+            antwoorden, gegevens van gezinsleden of andere inhoud uit het
+            inschrijfformulier naar Meta. Als u marketingcookies weigert, wordt
+            de Meta Pixel niet geladen en kunt u de website normaal blijven
+            gebruiken. U kunt uw keuze op ieder moment wijzigen via
+            Cookie-instellingen.
+          </p>
+          <CookieSettingsButton className="inline-flex min-h-11 items-center rounded-xl border border-slate-300 bg-white px-4 py-2 font-semibold text-primary transition hover:border-primary hover:bg-slate-50" />
+          <p>
+            Meer informatie over hoe Meta persoonsgegevens verwerkt, vindt u in
+            het&nbsp;
+            <CustomLink href="https://www.facebook.com/privacy/policy/">
+              privacybeleid van Meta
+            </CustomLink>
+            .
+          </p>
+        </div>
 
         <p className={sectionTitleStyling}>
           Gegevens inzien, aanpassen of verwijderen
