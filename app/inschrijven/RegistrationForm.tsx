@@ -50,6 +50,7 @@ export default function RegistrationForm({
 }: RegistrationFormProps) {
   const isCampaign = variant === "campaign";
   const formRef = useRef<HTMLFormElement>(null);
+  const feedbackRef = useRef<HTMLDivElement>(null);
   const linkStyling =
     "absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full";
 
@@ -113,6 +114,7 @@ export default function RegistrationForm({
     data: Record<string, { answer: string; details?: string }>,
   ) => {
     setPrimaryUserMedicalData(data);
+    setAlert(null);
     setIsMedicalModalOpen(false);
   };
 
@@ -152,6 +154,20 @@ export default function RegistrationForm({
     });
   };
 
+  const showFormError = (message: string) => {
+    setAlert({ type: "danger", message });
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        feedbackRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        feedbackRef.current?.focus({ preventScroll: true });
+      });
+    });
+  };
+
   const validateVisibleStep = () => {
     const stepContainer = formRef.current?.querySelector(
       `[data-registration-step="${currentStep}"]`,
@@ -182,10 +198,9 @@ export default function RegistrationForm({
     if (!validateVisibleStep()) return;
 
     if (currentStep === 3 && !primaryUserMedicalData) {
-      setAlert({
-        type: "danger",
-        message: "Vul de medische vragenlijst in voordat u verdergaat.",
-      });
+      showFormError(
+        "Vul eerst uw medische vragenlijst in. Daarna kunt u verder.",
+      );
 
       return;
     }
@@ -224,10 +239,9 @@ export default function RegistrationForm({
 
     // Validation checks
     if (!primaryUserMedicalData) {
-      setAlert({
-        type: "danger",
-        message: "U moet de medische vragenlijst voor uzelf invullen.",
-      });
+      showFormError(
+        "Vul eerst uw medische vragenlijst in. Daarna kunt u uw inschrijving versturen.",
+      );
 
       return;
     }
@@ -241,21 +255,18 @@ export default function RegistrationForm({
         const memberName =
           formData.get(`familyMembers[${id}][firstName]`) || `Gezinslid ${id}`;
 
-        setAlert({
-          type: "danger",
-          message: `U moet de medische vragenlijst voor ${memberName} invullen.`,
-        });
+        showFormError(
+          `Vul eerst de medische vragenlijst voor ${memberName} in. Daarna kunt u uw inschrijving versturen.`,
+        );
 
         return;
       }
     }
 
     if (!isTermsAccepted) {
-      setAlert({
-        type: "danger",
-        message:
-          "U moet akkoord gaan met de privacyverklaring om het formulier te verzenden.",
-      });
+      showFormError(
+        "Ga akkoord met de privacyverklaring om uw inschrijving te versturen.",
+      );
 
       return;
     }
@@ -508,18 +519,12 @@ export default function RegistrationForm({
           // Analytics must never affect a successful registration.
         }
       } else {
-        setAlert({
-          type: "danger",
-          message:
-            "Er is een fout opgetreden bij het verzenden van uw inschrijving. Gelieve het later opnieuw te proberen.",
-        });
+        showFormError(
+          "Het versturen is niet gelukt. Probeer het later opnieuw.",
+        );
       }
     } catch (error) {
-      setAlert({
-        type: "danger",
-        message:
-          "Er is een fout opgetreden bij het verzenden van uw inschrijving. Gelieve het later opnieuw te proberen.",
-      });
+      showFormError("Het versturen is niet gelukt. Probeer het later opnieuw.");
     } finally {
       setIsSubmitting(false);
     }
@@ -1030,6 +1035,7 @@ export default function RegistrationForm({
                     id={id}
                     index={arrayIndex}
                     onRemove={() => removeFamilyMember(id)}
+                    onMedicalCompleted={() => setAlert(null)}
                   />
                 ))}
               </div>
@@ -1068,14 +1074,23 @@ export default function RegistrationForm({
           </div>
         </section>
 
-        {alert && (
+        {alert?.type === "danger" ? (
+          <div
+            ref={feedbackRef}
+            className="mt-4 scroll-mt-24 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold leading-relaxed text-red-700 outline-none focus-visible:ring-2 focus-visible:ring-red-300"
+            role="alert"
+            tabIndex={-1}
+          >
+            {alert.message}
+          </div>
+        ) : alert ? (
           <Alert
             className="mt-4"
             color={alert.type}
             title={alert.message}
             onClose={() => setAlert(null)}
           />
-        )}
+        ) : null}
 
         <div
           className={clsx(

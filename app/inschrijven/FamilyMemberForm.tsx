@@ -12,10 +12,12 @@ export default function FamilyMemberForm({
   id,
   index,
   onRemove,
+  onMedicalCompleted,
 }: {
   id: number;
   index: number;
   onRemove: () => void;
+  onMedicalCompleted?: () => void;
 }) {
   const namePrefix = `familyMembers[${id}]`;
 
@@ -34,6 +36,7 @@ export default function FamilyMemberForm({
   ) => {
     setMedicalData(data);
     setMedicalResetNotice(false);
+    onMedicalCompleted?.();
     setIsMedicalModalOpen(false);
   };
 
