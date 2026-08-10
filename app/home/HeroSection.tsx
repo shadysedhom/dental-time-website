@@ -13,11 +13,10 @@ export default function HeroSection() {
         fill
         preload
         alt="De receptie van Dental Time in Nieuwegein"
-        className="object-cover"
+        className="object-cover object-[34%_center] lg:object-center"
         quality={88}
         sizes="(max-width: 639px) 150vh, 100vw"
-        src="/hero-img-upscaled.png"
-        style={{ objectPosition: "54% center" }}
+        src="/about-us-hero-upscaled.jpeg"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#11182b]/25 via-transparent to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#11182b]/25 to-transparent sm:hidden" />

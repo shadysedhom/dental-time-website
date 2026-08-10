@@ -316,9 +316,9 @@ export default async function TreatmentPage({ params }: TreatmentPageProps) {
             </span>
             <div>
               <dt className="font-serif text-xl font-semibold">
-                4.4 beoordeling
+                9.4 beoordeling
               </dt>
-              <dd className="text-sm text-slate-500">Google</dd>
+              <dd className="text-sm text-slate-500">Tandarts.nl</dd>
             </div>
           </div>
           <div className="flex items-center gap-4 border-b border-[#ded8cc] px-5 py-5 sm:border-b-0 sm:px-6">

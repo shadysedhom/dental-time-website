@@ -19,12 +19,6 @@ type TrustItem = {
 
 const trustItems: TrustItem[] = [
   {
-    Icon: Star,
-    value: "4.4",
-    label: "Google-rating",
-    detail: "Ervaringen van patiënten",
-  },
-  {
     Icon: ShieldCheck,
     value: "9.4",
     label: "Tandarts.nl",
@@ -60,15 +54,13 @@ export default function SocialProofSection() {
           </h2>
         </div>
 
-        <div className="grid px-6 py-6 sm:grid-cols-2 sm:px-10 lg:grid-cols-4 lg:py-8">
+        <div className="grid px-6 py-6 md:grid-cols-3 md:px-10 lg:py-8">
           {trustItems.map(({ Icon, detail, label, value }, index) => (
             <div
               key={label}
-              className={`flex items-center gap-4 border-[#b88e32]/15 py-5 sm:px-5 lg:justify-center lg:px-6 ${
-                index > 0 ? "border-t sm:border-t-0" : ""
-              } ${index % 2 === 1 ? "sm:border-l" : ""} ${
-                index > 1 ? "sm:border-t lg:border-t-0" : ""
-              } ${index > 0 ? "lg:border-l" : ""}`}
+              className={`flex items-center gap-4 border-[#b88e32]/15 py-5 md:justify-center md:px-6 ${
+                index > 0 ? "border-t md:border-l md:border-t-0" : ""
+              }`}
             >
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f6edd8] text-[#9a752b]">
                 <Icon aria-hidden="true" className="h-5 w-5" />
