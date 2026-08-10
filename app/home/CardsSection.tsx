@@ -39,7 +39,7 @@ const actionCards: ActionCardProps[] = [
     Icon: CalendarCheck,
     title: "Een afspraak maken",
     description:
-      "Wij nemen graag de tijd om een passend moment voor uw bezoek te vinden.",
+      "Wij plannen graag een passend moment voor uw bezoek in.",
     href: "tel:0306049005",
     linkText: "Bel 030 604 9005",
     image: "/clinic-dental-time.jpeg",

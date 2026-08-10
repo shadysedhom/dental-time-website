@@ -12,11 +12,12 @@ export default function HeroSection() {
       <Image
         fill
         preload
-        alt="De receptie van Dental Time in Nieuwegein"
-        className="object-cover object-[34%_center] lg:object-center"
+        alt="Een patiënt bij Dental Time in Nieuwegein"
+        className="object-cover"
         quality={88}
         sizes="(max-width: 639px) 150vh, 100vw"
-        src="/about-us-hero-upscaled.jpeg"
+        src="/sitting-smile.jpg"
+        style={{ objectPosition: "62% center" }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#11182b]/25 via-transparent to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#11182b]/25 to-transparent sm:hidden" />
