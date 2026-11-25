@@ -265,9 +265,7 @@ export default function NewPatientsRegistrationPage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-[#11182b] px-5 py-16 text-white sm:px-8 sm:py-28">
-          <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#3a4e9d]/20 blur-3xl" />
-          <div className="absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#b18a36]/10 blur-3xl" />
+        <section className="relative overflow-hidden bg-[#11182b] bg-[radial-gradient(circle_at_calc(100%-12rem)_12rem,rgba(58,78,157,0.20),transparent_19rem),radial-gradient(circle_at_4rem_100%,rgba(177,138,54,0.10),transparent_15rem)] px-5 py-16 text-white sm:px-8 sm:py-28">
           <div className="relative mx-auto max-w-7xl">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
               <div>
@@ -374,8 +372,7 @@ export default function NewPatientsRegistrationPage() {
                 </div>
               </figure>
 
-              <article className="relative flex min-w-0 flex-col justify-center overflow-hidden rounded-[2rem] bg-[#293b75] p-7 text-white shadow-[0_24px_65px_rgba(27,39,77,0.18)] sm:p-10">
-                <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#b18a36]/15 blur-3xl" />
+              <article className="relative flex min-w-0 flex-col justify-center overflow-hidden rounded-[2rem] bg-[#293b75] bg-[radial-gradient(circle_at_top_right,rgba(177,138,54,0.15),transparent_14rem)] p-7 text-white shadow-[0_24px_65px_rgba(27,39,77,0.18)] sm:p-10">
                 <p className="relative text-sm font-bold uppercase tracking-[0.2em] text-[#ecd38f]">
                   Welkom bij Dental Time
                 </p>
